@@ -1,0 +1,6 @@
+- id: format-yaml
+  name: Format YAML with Prettier
+  entry: npx prettier --write
+  language: node
+  types: [yaml]
+  files: \.(yaml|yml)$
