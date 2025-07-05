@@ -16,4 +16,4 @@ repos:
         entry: npx prettier --write
         language: node
         types: [yaml]
-        files: \.(yaml|yml)$
+        files: \.pre-commit*\.(yaml|yml)$
