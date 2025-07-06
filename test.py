@@ -2,6 +2,7 @@ from glob import glob
 import os.path
 import subprocess
 
+import git
 import pytest
 
 TEST_ROOT = os.path.join(os.path.dirname(__file__), "tests")
@@ -22,6 +23,19 @@ def simplify_test_name(test_name: str) -> str:
 
 
 TEST_FILES = {simplify_test_name(name): name for name in get_test_files()}
+
+
+@pytest.fixture(autouse=True)
+def git_setup():
+    repository = git.Repo()
+    diff = repository.index.diff(None, paths=TEST_ROOT)
+    if diff:
+        raise Exception(
+            "Git repository has changes to the worktree."
+            "Please, `git restore` before using the test script."
+        )
+    yield
+    repository.git.restore(TEST_ROOT)
 
 
 @pytest.mark.parametrize("test_name", TEST_FILES.keys())
