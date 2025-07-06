@@ -8,6 +8,7 @@ repos:
       - id: mixed-line-ending
       - id: trailing-whitespace
       - id: check-merge-conflict
+      - id: requirements-txt-fixer
 
   - repo: local
     hooks:
@@ -16,4 +17,12 @@ repos:
         entry: npx prettier --write
         language: node
         types: [yaml]
-        files: \.(yaml|yml)$
+        files: \.pre-commit*\.(yaml|yml)$
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.11.11
+    hooks:
+      - id: ruff-format
+      - id: ruff
+        args:
+          - --fix
