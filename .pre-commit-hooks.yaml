@@ -3,7 +3,6 @@
   entry: npx prettier --write
   language: node
   types: [yaml]
-  files: \.(yaml|yml)$
 
 - id: dbg-check
   name: Ensure no `dbg` statements or `#include <dbg.h>` included in source files.
