@@ -5,9 +5,9 @@
   types: [yaml]
   files: \.(yaml|yml)$
 
-- id: no-debug
+- id: dbg-check
   name: Ensure no `dbg` statements or `#include <dbg.h>` included in source files.
-  entry: ./validate-debug.sh
+  entry: ./validate-dbg.sh
   language: script
   types_or: [c++, file]
   files: \.(cpp|c++|cxx|hpp|h++|hxx|cu|cuh)$
