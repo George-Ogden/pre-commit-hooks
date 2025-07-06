@@ -10,7 +10,7 @@ for file in "$@"; do
         EXITCODE=1
     done < "$LOG";
 
-    grep -nE '^#include *(\"dbg\.h\"|<dbg\.h>)' $file > $LOG
+    grep -nE '^[[:space:]]*#include[[:space:]]+(\"dbg\.h\"|<dbg\.h>)[[:space:]]*$' $file > $LOG
     while IFS= read -r line; do
         printf "\`dbg.h\` import found in %s:%s\n" "$file" "$line"
         EXITCODE=1
