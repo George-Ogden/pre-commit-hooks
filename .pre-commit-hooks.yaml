@@ -9,4 +9,11 @@
   entry: ./validate-dbg.sh
   language: script
   types_or: [c++, file]
-  files: \.(cpp|c++|cxx|hpp|h++|hxx|cu|cuh)$
+  files: \.(cpp|c\+\+|cxx|hpp|h\+\+|hxx|cu|cuh)$
+
+- id: pragma-once
+  name: Ensure all header files have `#pragma once` before any other imports.
+  entry: ./validate-pragma.sh
+  language: script
+  types_or: [c++, file]
+  files: \.(hpp|h\+\+|hxx|cuh)$
