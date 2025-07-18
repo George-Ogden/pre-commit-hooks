@@ -6,14 +6,8 @@ If you are unfamiliar with pre-commit hooks, see their website: https://pre-comm
 
 This repository provides the following pre-commit hooks:
 
-- [format-yaml](#format-yaml) - automatically format YAML files with Prettier
 - [dbg-check](#dbg-check) - ensure no `dbg` statements or headers are included in the source code.
 - [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
-
-### format-yaml
-
-Use Prettier to format YAML files (`.yaml` and `.yml`).
-This requires an installation of `node`.
 
 ### dbg-check
 
@@ -45,7 +39,6 @@ repos:
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
     rev: v0.1.2
     hooks:
-      - id: format-yaml
       - id: dbg-check
         files: ^(src/|include/|test/)
       - id: pragma-once
