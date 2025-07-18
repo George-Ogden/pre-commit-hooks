@@ -1,9 +1,3 @@
-- id: format-yaml
-  name: Format YAML with Prettier
-  entry: npx prettier --write
-  language: node
-  types: [yaml]
-
 - id: dbg-check
   name: Ensure no `dbg` statements or `#include <dbg.h>` included in source files.
   entry: ./validate-dbg.sh
