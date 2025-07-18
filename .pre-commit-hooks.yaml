@@ -14,6 +14,6 @@
 
 - id: check-merge-conflict
   name: Check for merge-conflicts.
-  entry: check-merge-conflict
-  language: python
+  entry: ./validate-merge-conflict.sh
+  language: script
   types: [file]
