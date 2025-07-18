@@ -25,3 +25,6 @@ force-sort-within-sections = true
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[project.scripts]
+check-merge-conflict = "pre_commit_hooks.check_merge_conflict:main"
