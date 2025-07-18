@@ -1,16 +1,14 @@
 [project]
-name = "pre-commit-hooks"
+name = "pre-commit-hooks-extra"
 version = "0.1.0"
+dynamic = ["dependencies"]
 
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=62"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
-
-[tool.setuptools.packages.find]
-where = ["src"]
+package-dir = {"pre_commit_hooks_extra" = "src"}
 
 [tool.ruff]
 line-length = 100
@@ -27,4 +25,7 @@ quote-style = "double"
 indent-style = "space"
 
 [project.scripts]
-check-merge-conflict = "pre_commit_hooks.check_merge_conflict:main"
+check-merge-conflict = "pre_commit_hooks_extra.check_merge_conflict:main"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
