@@ -1,15 +1,3 @@
-[project]
-name = "pre-commit-hooks-extra"
-version = "0.1.0"
-dynamic = ["dependencies"]
-
-[build-system]
-requires = ["setuptools>=62"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools]
-package-dir = {"pre_commit_hooks_extra" = "src"}
-
 [tool.ruff]
 line-length = 100
 
@@ -23,9 +11,3 @@ force-sort-within-sections = true
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
-
-[project.scripts]
-check-merge-conflict = "pre_commit_hooks_extra.check_merge_conflict:main"
-
-[tool.setuptools.dynamic]
-dependencies = {file = ["requirements.txt"]}
