@@ -2,6 +2,12 @@
 
 If you are unfamiliar with pre-commit hooks, see their website: https://pre-commit.com/.
 
+## Compatibility
+
+This hook is tested with Python 3.9-3.13.
+The hooks use bash scripts, so is tested and run on Ubuntu.
+It may work with other Python versions or operating systems (such as MacOS or WSL).
+
 ## Hooks
 
 This repository provides the following pre-commit hooks:
