@@ -1,9 +1,8 @@
 - id: dbg-check
-  name: Ensure no `dbg` statements or `#include <dbg.h>` included in source files.
+  name: Ensure no `dbg` statements, macros or expressions included in source files.
   entry: ./validate-dbg.sh
   language: script
-  types_or: [c++, file]
-  files: \.(cpp|c\+\+|cxx|hpp|h\+\+|hxx|cu|cuh)$
+  types: [text]
 
 - id: pragma-once
   name: Ensure all header files have `#pragma once` before any other imports.

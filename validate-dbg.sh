@@ -4,7 +4,7 @@ LOG=$(mktemp)
 
 EXITCODE=0
 for file in "$@"; do
-    grep -nE 'dbg *\(' "$file" > "$LOG"
+    grep -nE 'dbg!? *\(' "$file" > "$LOG"
     while IFS= read -r line; do
         printf "\`dbg\` expression found in %s:%s\n" "$file" "$line"
         EXITCODE=1
