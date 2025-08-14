@@ -12,15 +12,14 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 
 This repository provides the following pre-commit hooks:
 
-- [dbg-check](#dbg-check) - ensure no `dbg` statements or headers are included in the source code.
+- [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
 - [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
 - [check-merge-conflict](#check-merge-conflict)
 
 ### dbg-check
 
-Remove `dbg` expressions/statements from C++/CUDA source and header files.
-It also checks for `#included <dbg.h>` or `#include "dbg.h"` directives.
-See https://github.com/sharkdp/dbg-macro for the `dbg(...)` macro.
+Remove `dbg` expressions/statements from Rust/Python/C++/CUDA/other source and header files.
+It also checks for `#included <dbg.h>` or `from debug import dbg` imports.
 
 ### pragma once
 
@@ -51,10 +50,10 @@ repos:
       - id: check-merge-conflict
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v0.3.0
+    rev: v0.4.0
     hooks:
       - id: dbg-check
-        files: ^(src/|include/|test/)
+        exclude: ^test/
       - id: pragma-once
       - id: check-merge-conflict
 ```
