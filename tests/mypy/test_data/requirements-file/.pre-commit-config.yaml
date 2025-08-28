@@ -1,0 +1,8 @@
+repos:
+    - repo: .
+      rev: HEAD
+      hooks:
+          - id: mypy
+            args:
+              - --requirements-file
+              - tests/mypy/test_data/requirements-file/requirements-dev.txt
