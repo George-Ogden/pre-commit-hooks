@@ -16,3 +16,9 @@
   entry: ./validate-merge-conflict.sh
   language: script
   types: [file]
+
+- id: mypy
+  name: MyPy
+  entry: ./run-mypy.sh
+  language: system
+  types: [python]
