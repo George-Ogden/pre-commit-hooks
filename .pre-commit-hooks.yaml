@@ -20,5 +20,5 @@
 - id: mypy
   name: MyPy
   entry: ./run-mypy.sh
-  language: system
+  language: script
   types: [python]
