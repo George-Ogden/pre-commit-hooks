@@ -22,6 +22,10 @@ jobs:
         with:
           lfs: true
 
+      - name: Check version in README
+        run: |
+          cat version.txt | xargs printf "    - repo: https://github.com/George-Ogden/pre-commit-hooks/\n      rev: v%s\n"  | xargs -i grep -Fz -- "{}" README.md
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
