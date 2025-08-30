@@ -1,3 +1,4 @@
 GitPython
 pre-commit
 pytest
+wcwidth
