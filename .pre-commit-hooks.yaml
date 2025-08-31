@@ -22,3 +22,9 @@
   entry: ./run-mypy.sh
   language: script
   types: [python]
+
+- id: todo-check
+  name: Check for 'todo' or 'fixme' in file.
+  entry: ./validate-todo.sh
+  language: script
+  types: [text]
