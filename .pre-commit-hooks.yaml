@@ -24,7 +24,7 @@
   types: [python]
 
 - id: todo-check
-  name: Check for 'todo' or 'fixme' in file.
+  name: Check for 'todo' or 'fixme' left in source files.
   entry: ./validate-todo.sh
   language: script
   types: [text]
