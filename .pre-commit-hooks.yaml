@@ -28,3 +28,4 @@
   entry: ./validate-todo.sh
   language: script
   types: [text]
+  exclude: ^\.
