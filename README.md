@@ -13,14 +13,21 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 This repository provides the following pre-commit hooks:
 
 -   [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
+-   [todo-check](#todo-check) - ensure no "todo"s or "fixme"s are left in the source code.
 -   [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
 -   [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
 -   [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
 
 ### dbg-check
 
-Remove `dbg` expressions/statements from Rust/Python/C++/CUDA/other source and header files.
+Check `dbg` expressions/statements have been removed from Rust/Python/C++/CUDA/other files.
 It also checks for `#included <dbg.h>` or `from debug import dbg` imports. (see https://github.com/George-Ogden/dbg).
+
+### todo-check
+
+Remove any "fixme"s or "todo"s that are left in your code.
+It checks comments and code, such as `todo!()` or `# TODO: ...`.
+Any words that contain either of these phrases are ignored (such as "pho**todo**cumentary").
 
 ### pragma-once
 
@@ -59,10 +66,12 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.1.0
+      rev: v1.2.0
       hooks:
           - id: dbg-check
             exclude: ^test/
+          - id: todo-check
+            exclude: README
           - id: pragma-once
           - id: check-merge-conflict
           - id: mypy
