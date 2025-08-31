@@ -25,7 +25,7 @@ It also checks for `#included <dbg.h>` or `from debug import dbg` imports. (see 
 
 ### todo-check
 
-Remove any "fixme"s or "todo"s that are left in your code.
+Find any "fixme"s or "todo"s that are left in your source code.
 It checks comments and code, such as `todo!()` or `# TODO: ...`.
 Any words that contain either of these phrases are ignored (such as "pho**todo**cumentary").
 Hidden files are ignored.
@@ -67,7 +67,7 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.1
+      rev: v1.2.2
       hooks:
           - id: dbg-check
             exclude: ^test/
