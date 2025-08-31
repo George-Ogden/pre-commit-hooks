@@ -28,6 +28,7 @@ It also checks for `#included <dbg.h>` or `from debug import dbg` imports. (see 
 Remove any "fixme"s or "todo"s that are left in your code.
 It checks comments and code, such as `todo!()` or `# TODO: ...`.
 Any words that contain either of these phrases are ignored (such as "pho**todo**cumentary").
+Hidden files are ignored.
 
 ### pragma-once
 
@@ -66,7 +67,7 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.0
+      rev: v1.2.1
       hooks:
           - id: dbg-check
             exclude: ^test/
