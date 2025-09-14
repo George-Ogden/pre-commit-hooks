@@ -67,7 +67,7 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.2
+      rev: v1.2.3
       hooks:
           - id: dbg-check
             exclude: ^test/
