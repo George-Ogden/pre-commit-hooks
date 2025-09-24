@@ -25,4 +25,4 @@ if [[ ! -z "$REQUIREMENTS_FILE" ]]; then
     REQUIREMENTS+=("-r$REQUIREMENTS_FILE")
 fi
 
-pip install "${REQUIREMENTS[@]}" && mypy "${MYPY_ARGS[@]}"
+pip install uv && uv pip install "${REQUIREMENTS[@]}" --system && mypy "${MYPY_ARGS[@]}"

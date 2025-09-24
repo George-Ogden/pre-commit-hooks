@@ -42,7 +42,7 @@ This is intended as an improved version of `check-merge-conflict` in https://git
 The two additional features are handling LFS conflicts and underlines of `=` in `.rst` files.
 Unlink the original, this hook takes no arguments.
 
-# mypy
+### mypy
 
 Run [MyPy](#https://github.com/python/mypy) in an environment with dependencies.
 This is intended as an improved version of https://github.com/pre-commit/mirrors-mypy.
@@ -67,7 +67,7 @@ repos:
           - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.3
+      rev: v1.2.4
       hooks:
           - id: dbg-check
             exclude: ^test/
