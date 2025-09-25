@@ -10,31 +10,16 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 5
-    strategy:
-      matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v3.1.0
+    with:
+      python-versions: "['3.9', '3.10', '3.11', '3.12', '3.13']"
 
+  readme-check:
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          lfs: true
+        uses: actions/checkout@v5
 
       - name: Check version in README
         run: |
           cat version.txt | xargs printf "    - repo: https://github.com/George-Ogden/pre-commit-hooks/\n      rev: v%s\n"  | xargs -i grep -Fz -- "{}" README.md
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-
-      - name: Install Python dependencies
-        run: |
-          pip install -r requirements-dev.txt
-
-      - name: Run Python Tests
-        run: |
-          pytest . -vv
