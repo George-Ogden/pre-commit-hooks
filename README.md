@@ -46,7 +46,7 @@ Unlink the original, this hook takes no arguments.
 
 Run [MyPy](#https://github.com/python/mypy) in an environment with dependencies.
 This is intended as an improved version of https://github.com/pre-commit/mirrors-mypy.
-It allows you to pass in a requirements file using the `-r` or `--requirements-file` flag (installed via `pip`). Any additional flags are passed to the `mypy` executable (no defaults).
+It allows you to pass in a requirements file using the `-r` or `--requirements-file` flag (installed via [`uv`](https://docs.astral.sh/uv/)). Any additional flags are passed to the `mypy` executable (no defaults).
 It requires that you have `pip` installed, but if you're using pre-commit, that shouldn't be an issue.
 You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), otherwise, the latest is installed.
 
