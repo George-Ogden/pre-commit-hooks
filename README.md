@@ -64,7 +64,6 @@ repos:
           - id: end-of-file-fixer
           - id: mixed-line-ending
           - id: trailing-whitespace
-          - id: check-merge-conflict
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
       rev: v1.2.4
