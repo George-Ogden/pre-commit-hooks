@@ -6,9 +6,9 @@ DIRECTORY=$(dirname $0)
 LOG=`mktemp`
 
 pre-commit try-repo . check-merge-conflict -v --files $DIRECTORY/test_data/multiple-conflicts.py | tee $LOG && exit 1
-grep -F multiple-conflicts.py:2 $LOG | grep '<<<<<<<'
-grep -F multiple-conflicts.py:4 $LOG | grep '======='
-grep -F multiple-conflicts.py:6 $LOG | grep '>>>>>>>'
-grep -F multiple-conflicts.py:14 $LOG | grep '<<<<<<<'
-grep -F multiple-conflicts.py:16 $LOG | grep '======='
-grep -F multiple-conflicts.py:18 $LOG | grep '>>>>>>>'
+grep -F 'multiple-conflicts.py:2: <<<<<<<' $LOG
+grep -F 'multiple-conflicts.py:4: =======' $LOG
+grep -F 'multiple-conflicts.py:6: >>>>>>>' $LOG
+grep -F 'multiple-conflicts.py:14: <<<<<<<' $LOG
+grep -F 'multiple-conflicts.py:16: =======' $LOG
+grep -F 'multiple-conflicts.py:18: >>>>>>>' $LOG
