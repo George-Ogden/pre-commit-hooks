@@ -34,3 +34,10 @@
   language: script
   types: [text]
   exclude: ^\.
+
+- id: spell-check-commit-msgs
+  name: Spell check commit message
+  description: Check for spelling errors in commit messages.
+  entry: ./run-codespell.sh
+  language: python
+  additional_dependencies: [codespell]
