@@ -2,19 +2,18 @@
 
 LOG=$(mktemp)
 
+. ./utils.sh
+
 EXITCODE=0
 for file in "$@"; do
-    grep -nwi 'todo' "$file" > "$LOG"
-    while IFS= read -r line; do
-        printf "\"todo\" found in %s:%s\n" "$file" "$line"
-        EXITCODE=1
-    done < "$LOG";
-
-    grep -nwi 'fixme' "$file" > "$LOG"
-    while IFS= read -r line; do
-        printf "\"fixme\" found in %s:%s\n" "$file" "$line"
-        EXITCODE=1
-    done < "$LOG";
+    for word in todo fixme; do
+        neat_word_search "$word"
+        while IFS= read -r line; do
+            printf "\"$word\" found in %s:%s\n" "$file" "$line"
+            EXITCODE=1
+        done < "$LOG";
+    done
 done
 
+rm $LOG
 exit $EXITCODE
