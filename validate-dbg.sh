@@ -2,21 +2,23 @@
 
 LOG=$(mktemp)
 
+. ./utils.sh
+
 EXITCODE=0
 for file in "$@"; do
-    grep -nE 'dbg!? *\(' "$file" > "$LOG"
+    neat_pattern_search 'dbg!? *\('
     while IFS= read -r line; do
         printf "\`dbg\` expression found in %s:%s\n" "$file" "$line"
         EXITCODE=1
     done < "$LOG";
 
-    grep -nE '^[[:space:]]*#include[[:space:]]+(\"dbg\.h\"|<dbg\.h>)[[:space:]]*$' "$file" > "$LOG"
+    neat_pattern_search '^[[:space:]]*#include[[:space:]]+(\"dbg\.h\"|<dbg\.h>)[[:space:]]*$'
     while IFS= read -r line; do
         printf "\`dbg.h\` include found in %s:%s\n" "$file" "$line"
         EXITCODE=1
     done < "$LOG";
 
-    grep -nE '^(.*[[:space:]])?import[[:space:]](.*[[:space:]])?dbg([[:space:]].*)?$' "$file" > "$LOG"
+    neat_pattern_search '^(.*[[:space:]])?import[[:space:]](.*[[:space:]])?dbg([[:space:]].*)?$'
     while IFS= read -r line; do
         printf "\`dbg\` import found in %s:%s\n" "$file" "$line"
         EXITCODE=1
@@ -24,4 +26,5 @@ for file in "$@"; do
 
 done
 
+rm -f "$LOG"
 exit $EXITCODE

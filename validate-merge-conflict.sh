@@ -2,6 +2,8 @@
 
 LOG=$(mktemp)
 
+. ./utils.sh
+
 CONFLICT_PATTERN='^(<<<<<<<[[:space:]]|=======([[:space:]]|$)|>>>>>>>[[:space:]])'
 declare -a CONFLICT_PATTERNS=(
     '^<<<<<<< '
@@ -13,13 +15,13 @@ declare -a CONFLICT_PATTERNS=(
 EXITCODE=0
 for file in "$@"; do
     file -ib "$file" | grep -qE '^text' || continue
-    grep -nE "$CONFLICT_PATTERN" "$file" > "$LOG"
+    neat_pattern_search "$CONFLICT_PATTERN"
     while IFS= read -r line; do
         for pattern in ${CONFLICT_PATTERNS[@]}; do
             if [[ "${file: -4}" == ".rst" ]] && echo "$pattern" | grep -q '='; then
                 continue
             fi
-            if echo "$line" | cut -d: -f2- | grep -qE "$pattern"; then
+            if echo "$line" | cut -d: -f2- | sed -E 's/^[[:space:]]+//' | grep -qE "$pattern"; then
                 printf "Merge conflict pattern found in %s:%s\n" "$file" "$line"
                 EXITCODE=1
                 break
@@ -28,4 +30,5 @@ for file in "$@"; do
     done < "$LOG";
 done
 
+rm "$LOG"
 exit $EXITCODE

@@ -59,14 +59,14 @@ default_stages: ["pre-commit", "commit-msg", "pre-push"]
 
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v5.0.0
+      rev: v6.0.0
       hooks:
           - id: end-of-file-fixer
           - id: mixed-line-ending
           - id: trailing-whitespace
 
     - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.4
+      rev: v1.2.5
       hooks:
           - id: dbg-check
             exclude: ^test/
