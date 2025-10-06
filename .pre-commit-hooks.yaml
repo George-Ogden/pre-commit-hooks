@@ -1,31 +1,43 @@
 - id: dbg-check
-  name: Ensure no `dbg` statements, macros or expressions included in source files.
+  name: Check for `dbg`
+  description: Ensure no `dbg` statements, macros or expressions included in source files.
   entry: ./validate-dbg.sh
   language: script
   types: [text]
 
 - id: pragma-once
-  name: Ensure all header files have `#pragma once` before any other imports.
+  name: Check for `#pragma once`
+  description: Ensure all header files have `#pragma once` before any other imports.
   entry: ./validate-pragma.sh
   language: script
   types_or: [c++, file]
   files: \.(hpp|h\+\+|hxx|cuh)$
 
 - id: check-merge-conflict
-  name: Check for merge-conflicts.
+  name: Check for merge conflicts
+  description: Check for merge-conflicts.
   entry: ./validate-merge-conflict.sh
   language: script
   types: [file]
 
 - id: mypy
-  name: MyPy
+  name: Run MyPy
+  description: MyPy
   entry: ./run-mypy.sh
   language: script
   types: [python]
 
 - id: todo-check
-  name: Check for 'todo' or 'fixme' left in source files.
+  name: Check for `todo`s
+  description: Check for 'todo' or 'fixme' left in source files.
   entry: ./validate-todo.sh
   language: script
   types: [text]
   exclude: ^\.
+
+- id: spell-check-commit-msgs
+  name: Spell check commit message
+  description: Check for spelling errors in commit messages.
+  entry: ./run-spell-check.sh
+  language: script
+  stages: [commit-msg]

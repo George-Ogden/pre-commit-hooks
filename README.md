@@ -12,11 +12,12 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 
 This repository provides the following pre-commit hooks:
 
--   [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
--   [todo-check](#todo-check) - ensure no "todo"s or "fixme"s are left in the source code.
--   [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
--   [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
--   [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
+- [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
+- [todo-check](#todo-check) - ensure no "todo"s or "fixme"s are left in the source code.
+- [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
+- [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
+- [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
+- [spell-check-commit-msgs](#spell-check-commit-msgs) - check for spelling errors in commit messages.
 
 ### dbg-check
 
@@ -50,32 +51,43 @@ It allows you to pass in a requirements file using the `-r` or `--requirements-f
 It requires that you have `pip` installed, but if you're using pre-commit, that shouldn't be an issue.
 You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), otherwise, the latest is installed.
 
+### spell-check-commit-msgs
+
+> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit._
+> _And god forbid if you pushed._
+
+This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
+`codespell` is installed via [`uv`](https://docs.astral.sh/uv/), so you need to have `pip` installed.
+You also need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
+
 ## Example Use
 
 Here's a sample `.pre-commit-config.yaml`:
 
 ```yaml
-default_stages: ["pre-commit", "commit-msg", "pre-push"]
+default_stages: ["pre-commit"]
+default_install_hook_types: ["pre-commit", "commit-msg"]
 
 repos:
-    - repo: https://github.com/pre-commit/pre-commit-hooks
-      rev: v6.0.0
-      hooks:
-          - id: end-of-file-fixer
-          - id: mixed-line-ending
-          - id: trailing-whitespace
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: trailing-whitespace
 
-    - repo: https://github.com/George-Ogden/pre-commit-hooks/
-      rev: v1.2.5
-      hooks:
-          - id: dbg-check
-            exclude: ^test/
-          - id: todo-check
-            exclude: README
-          - id: pragma-once
-          - id: check-merge-conflict
-          - id: mypy
-            args: [-r, requirements.txt, --strict]
+  - repo: https://github.com/George-Ogden/pre-commit-hooks/
+    rev: v1.3.0
+    hooks:
+      - id: dbg-check
+        exclude: ^test/
+      - id: todo-check
+        exclude: README
+      - id: pragma-once
+      - id: check-merge-conflict
+      - id: mypy
+        args: [-r, requirements.txt, --strict]
+      - id: spell-check-commit-msgs
 ```
 
 ### Development

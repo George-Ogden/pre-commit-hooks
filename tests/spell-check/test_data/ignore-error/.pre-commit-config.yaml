@@ -1,0 +1,7 @@
+repos:
+    - repo: .
+      rev: HEAD
+      hooks:
+          - id: spell-check-commit-msgs
+            args:
+              - -L wrod,woo
