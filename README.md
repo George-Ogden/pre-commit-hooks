@@ -55,7 +55,8 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 Here's a sample `.pre-commit-config.yaml`:
 
 ```yaml
-default_stages: ["pre-commit", "commit-msg", "pre-push"]
+default_stages: ["pre-commit"]
+default_install_hook_types: ["pre-commit", "commit-msg"]
 
 repos:
     - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -76,6 +77,7 @@ repos:
           - id: check-merge-conflict
           - id: mypy
             args: [-r, requirements.txt, --strict]
+          - id: spell-check-commit-msgs
 ```
 
 ### Development
