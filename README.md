@@ -53,8 +53,8 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 
 ### spell-check-commit-msgs
 
-> "[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit.
-> And god forbid if you pushed."
+> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit._
+> _And god forbid if you pushed._
 
 This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
 `codespell` is installed via [`uv`](https://docs.astral.sh/uv/), so you need to have `pip` installed.
