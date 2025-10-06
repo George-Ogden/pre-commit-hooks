@@ -40,3 +40,4 @@
   description: Check for spelling errors in commit messages.
   entry: ./run-spell-check.sh
   language: script
+  stages: [commit-msg]
