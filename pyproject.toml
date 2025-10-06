@@ -1,3 +1,19 @@
+[project]
+name = "Pre-Commit-Hooks"
+version = "0.0.0"
+requires-python = ">=3.9,<3.14"
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = []
+py-modules = []
+
+[tool.setuptools.data-files]
+"." = ["./run-spell-check.sh"]
+
 [tool.ruff]
 line-length = 100
 
