@@ -77,7 +77,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v1.2.5
+    rev: v1.3.0
     hooks:
       - id: dbg-check
         exclude: ^test/
