@@ -2,7 +2,8 @@
 
 LOG=$(mktemp)
 
-. ./utils.sh
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+. $SCRIPT_DIR/utils.sh
 
 CONFLICT_PATTERN='^(<<<<<<<[[:space:]]|=======([[:space:]]|$)|>>>>>>>[[:space:]])'
 declare -a CONFLICT_PATTERNS=(

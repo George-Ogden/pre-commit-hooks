@@ -57,8 +57,7 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 > _And god forbid if you pushed._
 
 This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
-`codespell` is installed via [`uv`](https://docs.astral.sh/uv/), so you need to have `pip` installed.
-You also need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
+You need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
 
 ## Example Use
 

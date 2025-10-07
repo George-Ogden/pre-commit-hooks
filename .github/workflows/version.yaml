@@ -1,9 +1,9 @@
-name: Tag New Version
+name: Tag New Version and Release
 
 on:
   push:
     branches:
-      - master
+      - "master"
   workflow_dispatch:
 
 permissions:
@@ -11,4 +11,4 @@ permissions:
 
 jobs:
   release:
-    uses: George-Ogden/actions/.github/workflows/text-release.yaml@v3.1.0
+    uses: George-Ogden/actions/.github/workflows/python-release.yaml@v3.1.0

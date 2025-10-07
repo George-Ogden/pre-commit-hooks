@@ -2,7 +2,8 @@
 
 LOG=$(mktemp)
 
-. ./utils.sh
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+. $SCRIPT_DIR/utils.sh
 
 EXITCODE=0
 for file in "$@"; do
