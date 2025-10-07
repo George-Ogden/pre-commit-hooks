@@ -20,6 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v5
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.13
+
       - name: Check version in README
         run: |
-          cat version.txt | xargs printf "    - repo: https://github.com/George-Ogden/pre-commit-hooks/\n      rev: v%s\n"  | xargs -i grep -Fz -- "{}" README.md
+          python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])" | xargs printf "    - repo: https://github.com/George-Ogden/pre-commit-hooks/\n      rev: v%s\n"  | xargs -i grep -Fz -- "{}" README.md
