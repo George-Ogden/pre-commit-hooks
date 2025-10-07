@@ -10,9 +10,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools]
 packages = []
 py-modules = []
-
-[tool.setuptools.data-files]
-"." = ["./run-spell-check.sh"]
+script-files = ["./run-spell-check.sh"]
 
 [tool.ruff]
 line-length = 100
