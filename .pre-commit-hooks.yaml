@@ -38,7 +38,7 @@
 - id: spell-check-commit-msgs
   name: Spell check commit message
   description: Check for spelling errors in commit messages.
-  entry: ./run-spell-check.sh
+  entry: run-spell-check.sh
   language: python
   stages: [commit-msg]
   additional_dependencies: [codespell]
