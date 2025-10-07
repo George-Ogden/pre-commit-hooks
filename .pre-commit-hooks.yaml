@@ -42,3 +42,10 @@
   language: python
   stages: [commit-msg]
   additional_dependencies: [codespell]
+
+- id: dict-rewrite
+  name: Rewrite string-based dictionaries.
+  entry: python dict_rewrite.py
+  types: [python]
+  language: python
+  additional_dependencies: []
