@@ -54,7 +54,7 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 
 ### spell-check-commit-msgs
 
-> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit._ > _And god forbid if you pushed._
+> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit. And god forbid if you pushed._
 
 This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
 You need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
@@ -77,7 +77,7 @@ dict(
 )
 ```
 
-Use the `--fix` arg to apply the change as well as linting files.
+Use the `--fix` arg to apply the change, as well as linting files.
 The change may disrupt the style of the code, so consider using a formatter, such as [`ruff`](https://github.com/astral-sh/ruff/).
 It is possible to ignore dictionaries using `# dict-ignore`.
 
