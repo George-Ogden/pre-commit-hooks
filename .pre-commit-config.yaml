@@ -38,5 +38,6 @@ repos:
         args: []
         exclude: ^tests/[^/]*/test_data/
         additional_dependencies:
-          - pytest
           - GitPython
+          - libcst==1.8.5
+          - pytest

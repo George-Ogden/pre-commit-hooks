@@ -1,75 +1,94 @@
 import argparse
-import ast
 import sys
 import textwrap
 from typing import cast
 
+import libcst as cst
+from libcst._position import CodeRange
+import libcst.matchers as m
+import libcst.metadata as metadata
 
-class DictChecker(ast.NodeTransformer):
+
+class DictChecker(cst.CSTTransformer):
+    METADATA_DEPENDENCIES = (metadata.PositionProvider,)
+
     def __init__(self, fix: bool) -> None:
         self.fix = fix
 
     def setup(self, filename: str) -> None:
         with open(filename) as f:
             self.lines = f.readlines()
-        self.has_changed = False
+        self.num_changes = 0
         self.filename = filename
 
-    def visit_Dict(self, node: ast.Dict) -> ast.expr:
-        node = self.generic_visit(node)  # type: ignore
-        if node.keys is None:
-            return node
-        existing_keys = [key for key in node.keys if key is not None]
-        if existing_keys and all(self.is_compatible_key(key) for key in existing_keys):
-            print(f"{self.filename}:{node.lineno}:{node.col_offset}: {self.get_lines(node)}")
-            self.has_changed = True
+    def leave_Dict(self, original_node: cst.Dict, updated_node: cst.Dict) -> cst.BaseExpression:
+        existing_elements: list[cst.DictElement] = [
+            element  # type: ignore
+            for element in updated_node.elements
+            if m.matches(element, m.DictElement())
+        ]
+        if existing_elements and all(
+            self.is_compatible_element(element) for element in existing_elements
+        ):
+            self.num_changes += 1
             if self.fix:
-                return ast.Call(
-                    ast.Name(
-                        "dict",
-                        lineno=node.lineno,
-                        col_offset=node.col_offset,
-                        end_lineno=node.end_lineno,
-                        end_col_offset=node.end_col_offset,
-                    ),
-                    args=[],
-                    keywords=[
-                        ast.keyword(
-                            arg=(k if k is None else cast(str, k.value)),
-                            value=v,
+                return cst.Call(
+                    cst.Name("dict"),
+                    args=[
+                        cst.Arg(
+                            keyword=cst.Name(cast(cst.SimpleString, element.key).raw_value),
+                            value=element.value,
+                            equal=cst.AssignEqual(
+                                whitespace_before=cst.SimpleWhitespace(""),
+                                whitespace_after=cst.SimpleWhitespace(""),
+                            ),
+                            comma=element.comma,
                         )
-                        for k, v in zip(
-                            cast(list[ast.Constant | None], node.keys), node.values, strict=True
+                        if isinstance(element, cst.DictElement)
+                        else cst.Arg(
+                            value=element.value,
+                            star="**",
+                            comma=element.comma,
+                            whitespace_after_star=cast(
+                                cst.StarredDictElement, element
+                            ).whitespace_before_value,
                         )
+                        for element in updated_node.elements
                     ],
                 )
-        return node
+            else:
+                position: CodeRange | None = self.get_metadata(
+                    metadata.PositionProvider, original_node
+                )  # type: ignore
+                print(
+                    f"{self.filename}:{self.format_range(position)} {self.format_code(original_node, position=position)}"
+                )
+        return updated_node
 
-    def _rstrip(self, line: str) -> str:
-        return line.rstrip() + "\n"
+    def format_range(self, range: CodeRange | None) -> str:
+        if range is None:
+            return ""
+        return f"{range.start.line}:{range.start.column + 1}:"
 
-    def get_lines(self, node: ast.expr) -> str:
-        lineno = node.lineno
-        if node.lineno == node.end_lineno or node.end_lineno is None:
-            source = self.lines[lineno - 1][node.col_offset : node.end_col_offset]
+    def format_code(self, node: cst.CSTNode, position: CodeRange | None) -> str:
+        source_code = self.module.code_for_node(node)
+        if position is None:
+            first_line, *lines = source_code.split("\n", maxsplit=1)
+            if lines:
+                [line] = lines
+                return f"{first_line}\n{textwrap.dedent(line)}"
+            else:
+                return first_line
         else:
-            first_line = self._rstrip(self.lines[lineno - 1][node.col_offset :])
-            lineno += 1
-            tail_lines = ""
-            while lineno < node.end_lineno:
-                tail_lines += self._rstrip(self.lines[lineno - 1])
-                lineno += 1
-            tail_lines += self.lines[lineno - 1][: node.end_col_offset]
-            source = first_line + textwrap.dedent(tail_lines)
-        return source
+            prefix = position.start.column * " "
+            padded_source = prefix + source_code
+            return textwrap.dedent(padded_source)
 
     @classmethod
-    def is_compatible_key(cls, key: ast.expr | None) -> bool:
+    def is_compatible_element(cls, element: cst.DictElement) -> bool:
         return (
-            key is None
-            or isinstance(key, ast.Constant)
-            and isinstance(key.value, str)
-            and key.value.isidentifier()
+            m.matches(element.key, m.SimpleString())
+            and cast(cst.SimpleString, element.key).raw_value.isidentifier()
         )
 
     def check_files(self, filenames: str) -> bool:
@@ -86,12 +105,18 @@ class DictChecker(ast.NodeTransformer):
         """Return whether the check fails."""
         self.setup(filename)
         try:
-            root = ast.parse("".join(self.lines), filename=filename)
+            self.module = cst.parse_module("".join(self.lines))
         except (SyntaxError, ValueError):
             return True
         else:
-            self.visit(root)
-        return self.has_changed
+            wrapper = cst.MetadataWrapper(self.module)
+            updated_module = wrapper.visit(self)
+        if self.num_changes and self.fix:
+            error = "error" if self.num_changes == 1 else "errors"
+            print(f"Fixed {self.num_changes} {error} in '{filename}'.")
+            with open(filename, "w") as f:
+                f.write(updated_module.code)
+        return self.num_changes > 0
 
 
 def parse_args() -> argparse.Namespace:

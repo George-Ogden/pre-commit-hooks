@@ -48,4 +48,4 @@
   entry: python dict_rewrite.py
   types: [python]
   language: python
-  additional_dependencies: []
+  additional_dependencies: [libcst==1.8.5]
