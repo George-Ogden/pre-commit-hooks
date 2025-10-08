@@ -1,4 +1,6 @@
 import argparse
+import bisect
+import re
 import sys
 import textwrap
 from typing import NoReturn, cast
@@ -9,11 +11,32 @@ import libcst.matchers as m
 import libcst.metadata as metadata
 
 
+class CommentFinder(cst.CSTVisitor):
+    METADATA_DEPENDENCIES = (metadata.PositionProvider,)
+
+    def __init__(self) -> None:
+        self.ignored_linenos: set[int] = set()
+
+    def visit_Comment(self, node: cst.Comment) -> None:
+        if re.search(r"\bdict-ignore\b", node.value):
+            position: CodeRange | None = self.get_metadata(metadata.PositionProvider, node)  # type: ignore
+            if position:
+                for lineno in range(position.start.line, position.end.line + 1):
+                    self.ignored_linenos.add(lineno)
+
+    @classmethod
+    def get_ignored_lines(cls, wrapper: cst.MetadataWrapper) -> frozenset[int]:
+        comment_finder = cls()
+        wrapper.visit(comment_finder)
+        return frozenset(comment_finder.ignored_linenos)
+
+
 class DictChecker(cst.CSTTransformer):
     METADATA_DEPENDENCIES = (metadata.PositionProvider,)
 
     def __init__(self, fix: bool) -> None:
         self.fix = fix
+        self.ignored_linenos: tuple[int, ...] = ()
 
     def setup(self, filename: str) -> None:
         with open(filename) as f:
@@ -21,7 +44,19 @@ class DictChecker(cst.CSTTransformer):
         self.num_changes = 0
         self.filename = filename
 
+    def is_ignored(self, position: CodeRange | None) -> bool:
+        if position is None:
+            return False
+        next_idx = bisect.bisect_left(self.ignored_linenos, position.start.line)
+        return (
+            next_idx < len(self.ignored_linenos)
+            and self.ignored_linenos[next_idx] <= position.end.line
+        )
+
     def leave_Dict(self, original_node: cst.Dict, updated_node: cst.Dict) -> cst.BaseExpression:
+        position: CodeRange | None = self.get_metadata(metadata.PositionProvider, original_node)  # type: ignore
+        if self.is_ignored(position):
+            return updated_node
         existing_elements: list[cst.DictElement] = [
             element  # type: ignore
             for element in updated_node.elements
@@ -57,11 +92,8 @@ class DictChecker(cst.CSTTransformer):
                     ],
                 )
             else:
-                position: CodeRange | None = self.get_metadata(
-                    metadata.PositionProvider, original_node
-                )  # type: ignore
                 print(
-                    f"{self.filename}:{self.format_range(position)} {self.format_code(original_node, position=position)}"
+                    f"{self.filename}:{self.format_range(position)} {self.format_code(original_node)}"
                 )
         return updated_node
 
@@ -70,19 +102,14 @@ class DictChecker(cst.CSTTransformer):
             return ""
         return f"{range.start.line}:{range.start.column + 1}:"
 
-    def format_code(self, node: cst.CSTNode, position: CodeRange | None) -> str:
+    def format_code(self, node: cst.CSTNode) -> str:
         source_code = self.module.code_for_node(node)
-        if position is None:
-            first_line, *lines = source_code.split("\n", maxsplit=1)
-            if lines:
-                [line] = lines
-                return f"{first_line}\n{textwrap.dedent(line)}"
-            else:
-                return first_line
+        first_line, *lines = source_code.split("\n", maxsplit=1)
+        if lines:
+            [line] = lines
+            return f"{first_line}\n{textwrap.dedent(line)}"
         else:
-            prefix = position.start.column * " "
-            padded_source = prefix + source_code
-            return textwrap.dedent(padded_source)
+            return first_line
 
     @classmethod
     def is_compatible_element(cls, element: cst.DictElement) -> bool:
@@ -110,6 +137,7 @@ class DictChecker(cst.CSTTransformer):
             return True
         else:
             wrapper = cst.MetadataWrapper(self.module)
+            self.ignored_linenos = tuple(sorted(CommentFinder.get_ignored_lines(wrapper)))
             updated_module = wrapper.visit(self)
         if self.num_changes and self.fix:
             error = "error" if self.num_changes == 1 else "errors"
