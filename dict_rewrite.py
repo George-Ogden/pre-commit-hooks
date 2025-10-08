@@ -3,7 +3,7 @@ import bisect
 import re
 import sys
 import textwrap
-from typing import NoReturn, cast
+from typing import NoReturn, Optional, cast
 
 import libcst as cst
 from libcst._position import CodeRange
@@ -19,7 +19,7 @@ class CommentFinder(cst.CSTVisitor):
 
     def visit_Comment(self, node: cst.Comment) -> None:
         if re.search(r"\bdict-ignore\b", node.value):
-            position: CodeRange | None = self.get_metadata(metadata.PositionProvider, node)  # type: ignore
+            position: Optional[CodeRange] = self.get_metadata(metadata.PositionProvider, node)  # type: ignore
             if position:
                 for lineno in range(position.start.line, position.end.line + 1):
                     self.ignored_linenos.add(lineno)
@@ -44,7 +44,7 @@ class DictChecker(cst.CSTTransformer):
         self.num_changes = 0
         self.filename = filename
 
-    def is_ignored(self, position: CodeRange | None) -> bool:
+    def is_ignored(self, position: Optional[CodeRange]) -> bool:
         if position is None:
             return False
         next_idx = bisect.bisect_left(self.ignored_linenos, position.start.line)
@@ -54,7 +54,7 @@ class DictChecker(cst.CSTTransformer):
         )
 
     def leave_Dict(self, original_node: cst.Dict, updated_node: cst.Dict) -> cst.BaseExpression:
-        position: CodeRange | None = self.get_metadata(metadata.PositionProvider, original_node)  # type: ignore
+        position: Optional[CodeRange] = self.get_metadata(metadata.PositionProvider, original_node)  # type: ignore
         if self.is_ignored(position):
             return updated_node
         existing_elements: list[cst.DictElement] = [
@@ -97,7 +97,7 @@ class DictChecker(cst.CSTTransformer):
                 )
         return updated_node
 
-    def format_range(self, range: CodeRange | None) -> str:
+    def format_range(self, range: Optional[CodeRange]) -> str:
         if range is None:
             return ""
         return f"{range.start.line}:{range.start.column + 1}:"
