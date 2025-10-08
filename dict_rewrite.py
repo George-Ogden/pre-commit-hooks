@@ -1,7 +1,7 @@
 import argparse
 import sys
 import textwrap
-from typing import cast
+from typing import NoReturn, cast
 
 import libcst as cst
 from libcst._position import CodeRange
@@ -136,6 +136,10 @@ def main(args: argparse.Namespace) -> int:
     return 0
 
 
-if __name__ == "__main__":
+def main_cli() -> NoReturn:
     args = parse_args()
     sys.exit(main(args))
+
+
+if __name__ == "__main__":
+    main_cli()

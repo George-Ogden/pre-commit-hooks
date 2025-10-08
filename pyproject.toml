@@ -4,6 +4,9 @@ version = "1.3.2"
 requires-python = ">=3.9,<3.14"
 dynamic = ["dependencies"]
 
+[project.scripts]
+dict-rewrite = "dict_rewrite:main_cli"
+
 [tool.setuptools.dynamic]
 dependencies = {file = ["requirements.txt"]}
 
@@ -13,9 +16,8 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 packages = []
-py-modules = []
+py-modules = ["dict_rewrite"]
 script-files = ["./run-spell-check.sh"]
-# todo: add dict rewrite
 
 [tool.ruff]
 line-length = 100

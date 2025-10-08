@@ -45,7 +45,6 @@
 
 - id: dict-rewrite
   name: Rewrite string-based dictionaries.
-  entry: python dict_rewrite.py
+  entry: dict-rewrite
   types: [python]
   language: python
-  additional_dependencies: [libcst==1.8.5]
