@@ -18,6 +18,7 @@ This repository provides the following pre-commit hooks:
 - [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
 - [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
 - [spell-check-commit-msgs](#spell-check-commit-msgs) - check for spelling errors in commit messages.
+- [dict-rewrite](#dict-rewrite) - rewrite string-keyed dictionaries to use `dict`.
 
 ### dbg-check
 
@@ -53,11 +54,32 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 
 ### spell-check-commit-msgs
 
-> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit._
-> _And god forbid if you pushed._
+> _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit. And god forbid if you pushed._
 
 This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
 You need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
+
+### dict-rewrite
+
+Make string-based dictionaries use `dict` instead of curly braces. For example,
+
+```python
+{
+  "a": "ascii",
+  "r": repr,
+  "integer": 15,
+}
+# is rewritten as
+dict(
+  a="ascii",
+  r=repr,
+  integer=15
+)
+```
+
+Use the `--fix` arg to apply the change, as well as linting files.
+The change may disrupt the style of the code, so consider using a formatter, such as [`ruff`](https://github.com/astral-sh/ruff/).
+It is possible to ignore dictionaries using `# dict-ignore`.
 
 ## Example Use
 
@@ -76,7 +98,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v1.3.2
+    rev: v1.4.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -87,6 +109,8 @@ repos:
       - id: mypy
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
+      - id: dict-rewrite
+        args: [--fix]
 ```
 
 ### Development

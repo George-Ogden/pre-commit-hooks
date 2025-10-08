@@ -42,3 +42,10 @@
   language: python
   stages: [commit-msg]
   additional_dependencies: [codespell]
+
+- id: dict-rewrite
+  name: Rewrite string-keyed dictionaries to use `dict`.
+  entry: dict-rewrite
+  types: [python]
+  language: python
+  additional_dependencies: [libcst==1.8.5]

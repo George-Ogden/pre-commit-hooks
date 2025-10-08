@@ -1,4 +1,5 @@
 default_stages: ["pre-commit"]
+default_install_hook_types: ["pre-commit", "commit-msg"]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -30,3 +31,20 @@ repos:
         args:
           - --fix
         exclude: ^tests/[^/]*/test_data/
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.18.2
+    hooks:
+      - id: mypy
+        args: []
+        exclude: ^tests/[^/]*/test_data/
+        additional_dependencies:
+          - GitPython
+          - libcst==1.8.5
+          - pytest
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: v2.4.1
+    hooks:
+      - id: codespell
+        stages: [commit-msg]

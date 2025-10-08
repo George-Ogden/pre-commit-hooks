@@ -1,0 +1,7 @@
+repos:
+    - repo: .
+      rev: HEAD
+      hooks:
+          - id: dict-rewrite
+            args: [--fix]
+            additional_dependencies: [libcst==1.8.5]
