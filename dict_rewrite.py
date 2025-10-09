@@ -1,5 +1,6 @@
 import argparse
 import bisect
+import keyword
 import re
 import sys
 import textwrap
@@ -116,6 +117,7 @@ class DictChecker(cst.CSTTransformer):
         return (
             m.matches(element.key, m.SimpleString())
             and cast(cst.SimpleString, element.key).raw_value.isidentifier()
+            and not keyword.iskeyword(cast(cst.SimpleString, element.key).raw_value)
         )
 
     def check_files(self, filenames: str) -> bool:
