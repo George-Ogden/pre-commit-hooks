@@ -4,7 +4,7 @@ If you are unfamiliar with pre-commit hooks, see their website: https://pre-comm
 
 ## Compatibility
 
-This hook is tested with Python 3.9-3.13.
+This hook is tested with Python 3.9-3.14.
 The hooks use bash scripts, so is tested and run on Ubuntu.
 It may work with other Python versions or operating systems (such as MacOS or WSL).
 
@@ -98,7 +98,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v1.4.2
+    rev: v1.4.3
     hooks:
       - id: dbg-check
         exclude: ^test/
