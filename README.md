@@ -98,7 +98,7 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v1.4.3
+    rev: v2.0.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -109,8 +109,6 @@ repos:
       - id: mypy
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
-      - id: dict-rewrite
-        args: [--fix]
 ```
 
 ### Development
