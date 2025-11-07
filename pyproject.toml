@@ -1,6 +1,6 @@
 [project]
 name = "Pre-Commit-Hooks"
-version = "1.4.1"
+version = "1.4.2"
 requires-python = ">=3.9,<3.14"
 
 [project.scripts]
