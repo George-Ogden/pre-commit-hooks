@@ -22,6 +22,12 @@ repos:
             symbols\ and\ spaces|
           )
 
+  - repo: https://github.com/George-Ogden/linter
+    rev: v1.1.0
+    hooks:
+      - id: lint
+        exclude: ^tests/[^/].*/test_data/
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.14.4
     hooks:
