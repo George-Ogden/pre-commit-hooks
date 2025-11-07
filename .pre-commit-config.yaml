@@ -40,7 +40,6 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         additional_dependencies:
           - GitPython
-          - libcst==1.8.5
           - pytest
 
   - repo: https://github.com/codespell-project/codespell
