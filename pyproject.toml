@@ -1,10 +1,7 @@
 [project]
 name = "Pre-Commit-Hooks"
-version = "1.4.3"
+version = "2.0.0"
 requires-python = ">=3.9,<3.15"
-
-[project.scripts]
-dict-rewrite = "dict_rewrite:main_cli"
 
 [build-system]
 requires = ["setuptools"]
@@ -12,7 +9,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 packages = []
-py-modules = ["dict_rewrite"]
 script-files = ["./run-spell-check.sh"]
 
 [tool.ruff]
