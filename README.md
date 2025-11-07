@@ -80,6 +80,14 @@ repos:
       - id: lint
         exclude: ^tests/[^/].*/test_data/
 
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.14.4
+    hooks:
+      - id: ruff-format
+      - id: ruff
+        args:
+          - --fix
+
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
     rev: v2.0.0
     hooks:
