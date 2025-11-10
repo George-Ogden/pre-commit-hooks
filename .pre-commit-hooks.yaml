@@ -26,7 +26,7 @@
   entry: ./run-mypy.sh
   language: script
   types: [python]
-  require-serial: true
+  require_serial: true
 
 - id: todo-check
   name: Check for `todo`s
