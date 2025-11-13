@@ -1,5 +1,7 @@
 -r requirements.txt
 GitPython
+pip
 pre-commit
 pytest
+pytest-xdist
 wcwidth
