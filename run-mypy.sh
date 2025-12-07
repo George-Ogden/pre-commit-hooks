@@ -30,4 +30,9 @@ if ! which -s uv && which -s pip; then
   pip install uv -qqq
 fi
 
-(uv pip install "${REQUIREMENTS[@]}" -qqq || uv pip install "${REQUIREMENTS[@]}" --system -qqq) && mypy "${MYPY_ARGS[@]}"
+SYSTEM_FLAG=
+if python -c "import sys; exit(sys.prefix != sys.base_prefix)"; then
+  SYSTEM_FLAG="--system"
+fi
+
+uv pip install "${REQUIREMENTS[@]}" -qqq $SYSTEM_FLAG && mypy "${MYPY_ARGS[@]}"
