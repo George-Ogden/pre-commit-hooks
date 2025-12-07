@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+set -e
 set -o pipefail
 LOG=$(mktemp)
 
@@ -25,4 +26,8 @@ if [[ ! -z "$REQUIREMENTS_FILE" ]]; then
     REQUIREMENTS+=("-r$REQUIREMENTS_FILE")
 fi
 
-pip install uv -qqq && (uv pip install "${REQUIREMENTS[@]}" -qqq || uv pip install "${REQUIREMENTS[@]}" --system -qqq) && mypy "${MYPY_ARGS[@]}"
+if ! which -s uv && which -s pip; then
+  pip install uv -qqq
+fi
+
+(uv pip install "${REQUIREMENTS[@]}" -qqq || uv pip install "${REQUIREMENTS[@]}" --system -qqq) && mypy "${MYPY_ARGS[@]}"
