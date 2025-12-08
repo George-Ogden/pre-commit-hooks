@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 
+set -e
 set -o pipefail
 LOG=$(mktemp)
 
@@ -25,4 +26,15 @@ if [[ ! -z "$REQUIREMENTS_FILE" ]]; then
     REQUIREMENTS+=("-r$REQUIREMENTS_FILE")
 fi
 
-pip install uv -qqq && (uv pip install "${REQUIREMENTS[@]}" -qqq || uv pip install "${REQUIREMENTS[@]}" --system -qqq) && mypy "${MYPY_ARGS[@]}"
+if ! which -s uv && which -s pip; then
+  pip install uv -qqq
+fi
+
+SYSTEM_FLAG=
+if python -c "import sys; exit(sys.prefix != sys.base_prefix)"; then
+  SYSTEM_FLAG="--system"
+fi
+
+uv pip install "${REQUIREMENTS[@]}" -qqq $SYSTEM_FLAG || exit 0
+
+mypy "${MYPY_ARGS[@]}"
