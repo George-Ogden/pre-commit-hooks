@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 cleanup_grep_output() {
     sed 's/\([[:digit:]]*:\)[[:space:]]*/\1 /'
