@@ -2,7 +2,7 @@
 
 LOG=$(mktemp)
 
-SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" ; pwd -P )
+SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1 ; pwd -P )
 . $SCRIPT_DIR/utils.sh
 
 CONFLICT_PATTERN='^(<<<<<<<[[:space:]]|=======([[:space:]]|$)|>>>>>>>[[:space:]])'
@@ -18,7 +18,7 @@ for file in "$@"; do
     file -ib "$file" | grep -qE '^text' || continue
     neat_pattern_search "$CONFLICT_PATTERN"
     while IFS= read -r line; do
-        for pattern in ${CONFLICT_PATTERNS[@]}; do
+        for pattern in "${CONFLICT_PATTERNS[@]}"; do
             if [[ "${file: -4}" == ".rst" ]] && echo "$pattern" | grep -q '='; then
                 continue
             fi

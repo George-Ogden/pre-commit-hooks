@@ -2,7 +2,6 @@
 
 set -e
 set -o pipefail
-LOG=$(mktemp)
 
 MYPY_ARGS=()
 

@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 
 set -o pipefail
-LOG=$(mktemp)
 
 MYPY_ARGS=()
 
