@@ -1,8 +1,7 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 set -e
 set -o pipefail
-LOG=$(mktemp)
 
 MYPY_ARGS=()
 
