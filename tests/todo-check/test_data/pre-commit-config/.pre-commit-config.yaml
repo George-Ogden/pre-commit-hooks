@@ -1,5 +1,5 @@
 repos:
-    - repo: ../../../../
-      rev: HEAD
-      hooks:
-          - id: todo-check
+  - repo: ../../../../
+    rev: HEAD
+    hooks:
+      - id: todo-check

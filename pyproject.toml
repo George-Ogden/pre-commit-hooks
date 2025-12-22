@@ -1,7 +1,10 @@
 [project]
 name = "Pre-Commit-Hooks"
-version = "2.0.4"
 requires-python = ">=3.9,<3.15"
+authors = [{name = "George Ogden"}]
+license = {file = "LICENSE"}
+readme = "README.md"
+dynamic = ["version"]
 
 [build-system]
 requires = ["setuptools"]
@@ -11,16 +14,5 @@ build-backend = "setuptools.build_meta"
 packages = []
 script-files = ["./run-spell-check.sh"]
 
-[tool.ruff]
-line-length = 100
-
-[tool.ruff.lint]
-extend-select = ["I", "UP", "F", "E", "W", "ERA001"]
-extend-ignore = ["F811", "E501"]
-
-[tool.ruff.lint.isort]
-force-sort-within-sections = true
-
-[tool.ruff.format]
-quote-style = "double"
-indent-style = "space"
+[tool.setuptools.dynamic]
+version = {file = ["version.txt"]}

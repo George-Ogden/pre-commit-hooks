@@ -1,5 +1,5 @@
 repos:
-    - repo: ../../../../
-      rev: HEAD
-      hooks:
-          - id: mypy
+  - repo: ../../../../
+    rev: HEAD
+    hooks:
+      - id: mypy
