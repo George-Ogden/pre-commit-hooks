@@ -2,7 +2,13 @@ default_stages: ["pre-commit"]
 default_install_hook_types: ["pre-commit", "commit-msg"]
 
 repos:
-  - repo: https://github.com/pre-commit/pre-commit-hooks
+  - repo: https://github.com/George-Ogden/mirror-rorrim/
+    rev: v0.4.1
+    hooks:
+      - id: mirror-check
+        fail_fast: true
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks/
     rev: v6.0.0
     hooks:
       - id: end-of-file-fixer
@@ -12,50 +18,55 @@ repos:
         exclude: ^tests/merge-conflict/test_data/
       - id: requirements-txt-fixer
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v3.1.0
-    hooks:
-      - id: prettier
-        exclude: |
-          (?x)(
-            ^tests/merge-conflict/test_data/conflict\.|
-            symbols\ and\ spaces|
-          )
-
-  - repo: https://github.com/George-Ogden/linter
-    rev: v1.1.0
+  - repo: https://github.com/George-Ogden/linter/
+    rev: v1.2.1
     hooks:
       - id: lint
-        exclude: ^tests/[^/].*/test_data/
+        exclude: ^tests/[^/]*/test_data/
+        args: [--fix]
 
-  - repo: https://github.com/koalaman/shellcheck-precommit
-    rev: v0.11.0
-    hooks:
-      - id: shellcheck
-        args: ["--severity=warning"]
-
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.4
+  - repo: https://github.com/astral-sh/ruff-pre-commit/
+    rev: v0.14.10
     hooks:
       - id: ruff-format
-        exclude: ^tests/[^/].*/test_data/
-      - id: ruff
+        exclude: ^tests/[^/]*/test_data/
+      - id: ruff-check
         args:
           - --fix
         exclude: ^tests/[^/]*/test_data/
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.18.2
+  - repo: https://github.com/pre-commit/mirrors-prettier/
+    rev: v4.0.0-alpha.8
     hooks:
-      - id: mypy
-        args: []
+      - id: prettier
+        additional_dependencies: [prettier]
         exclude: ^tests/[^/]*/test_data/
-        additional_dependencies:
-          - GitPython
-          - pytest
 
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
+  - repo: https://github.com/rhysd/actionlint/
+    rev: v1.7.9
     hooks:
-      - id: codespell
-        stages: [commit-msg]
+      - id: actionlint
+
+  - repo: https://github.com/George-Ogden/pre-commit-hooks/
+    rev: v2.0.4
+    hooks:
+      - id: check-merge-conflict
+        exclude: ^tests/merge-conflict/
+      - id: dbg-check
+        exclude: (?x)^(
+          tests/dbg-check/.*|
+          validate-dbg.sh
+          )$
+      - id: todo-check
+        exclude: (?x)^(
+          README.md|
+          .pre-commit-config.yaml|
+          .pre-commit-hooks.yaml|
+          .gitignore|
+          tests/[^/]*/.*|
+          validate-todo.sh
+          )$
+      - id: mypy
+        exclude: ^tests/[^/]*/test_data/
+        args: [-r, requirements-dev.txt, --show-traceback]
+      - id: spell-check-commit-msgs

@@ -1,6 +1,6 @@
 repos:
-    - repo: ../../../../
-      rev: HEAD
-      hooks:
-          - id: mypy
-            args: [-r, requirements.txt]
+  - repo: ../../../../
+    rev: HEAD
+    hooks:
+      - id: mypy
+        args: [-r, requirements.txt]

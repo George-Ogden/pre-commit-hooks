@@ -10,21 +10,6 @@ on:
 
 jobs:
   test:
-    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v3.1.3
+    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v3.2.0
     with:
       python-versions: "['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']"
-
-  readme-check:
-    runs-on: ubuntu-24.04
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v5
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.13
-
-      - name: Check version in README
-        run: |
-          python -c "import tomllib; print(tomllib.load(open('pyproject.toml', 'rb'))['project']['version'])" | xargs printf "    - repo: https://github.com/George-Ogden/pre-commit-hooks/\n      rev: v%s\n"  | xargs -i grep -Fz -- "{}" README.md

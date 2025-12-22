@@ -1,0 +1,12 @@
+name: README Check
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  readme-check:
+    uses: George-Ogden/actions/.github/workflows/readme-check.yaml@3.3.0
+    with:
+      prefix: "rev: v"
