@@ -5,12 +5,13 @@ LOG=$(mktemp)
 SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1 ; pwd -P )
 . $SCRIPT_DIR/utils.sh
 
-CONFLICT_PATTERN='^(<<<<<<<[[:space:]]|=======([[:space:]]|$)|>>>>>>>[[:space:]])'
+CONFLICT_PATTERN='^(<<<<<<<[[:space:]]|\|\|\|\|\|\|\|[[:space:]]|=======([[:space:]]|$)|>>>>>>>[[:space:]])'
 declare -a CONFLICT_PATTERNS=(
-    '^<<<<<<< '
+    '^<<<<<<<[[:space:]]'
+    '^\|\|\|\|\|\|\|[[:space:]]'
     '^=======[[:space:]]'
     '^=======$'
-    '^>>>>>>> '
+    '^>>>>>>>[[:space:]]'
 )
 
 EXITCODE=0

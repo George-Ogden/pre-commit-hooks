@@ -1,0 +1,9 @@
+jobs:
+  lint:
+<<<<<<< ours
+    uses: George-Ogden/actions/.github/workflows/lint.yaml@v3.3.0
+||||||| base
+    uses: George-Ogden/actions/.github/workflows/lint.yaml@v3.2.0
+=======
+    uses: George-Ogden/actions/.github/workflows/lint.yaml@v3.4.0
+>>>>>>> theirs

@@ -75,13 +75,13 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/George-Ogden/linter
-    rev: v1.2.0
+    rev: v1.2.1
     hooks:
       - id: lint
         exclude: ^tests/[^/].*/test_data/
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.4
+    rev: v0.14.10
     hooks:
       - id: ruff-format
       - id: ruff
@@ -89,7 +89,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.0.4
+    rev: v2.1.0
     hooks:
       - id: dbg-check
         exclude: ^test/
