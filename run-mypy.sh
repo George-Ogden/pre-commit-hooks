@@ -34,6 +34,6 @@ if python -c "import sys; exit(sys.prefix != sys.base_prefix)"; then
   SYSTEM_FLAG="--system"
 fi
 
-uv pip install "${REQUIREMENTS[@]}" -qqq $SYSTEM_FLAG || exit 0
+uv pip install "${REQUIREMENTS[@]}" -qqq $SYSTEM_FLAG || true
 
 mypy "${MYPY_ARGS[@]}"
