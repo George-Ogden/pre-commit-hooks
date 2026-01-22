@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   readme-check:
-    uses: George-Ogden/actions/.github/workflows/readme-check.yaml@v3.4.0
+    uses: George-Ogden/actions/.github/workflows/readme-check.yaml@v3.4.1
     with:
       prefix: "rev: v"
