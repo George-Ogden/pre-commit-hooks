@@ -7,7 +7,7 @@ SCRIPT_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")" || exit 1 ; pwd -P )
 
 EXITCODE=0
 for file in "$@"; do
-    for word in todo fixme; do
+    for word in todo fixme deleteme; do
         neat_word_search "$word"
         while IFS= read -r line; do
             printf "\"$word\" found in %s:%s\n" "$file" "$line"

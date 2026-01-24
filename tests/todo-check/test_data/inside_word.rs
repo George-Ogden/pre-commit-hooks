@@ -6,3 +6,4 @@ Items
 - afixmetted
 - stodo
 - astodonuvo
+- deletemeet
