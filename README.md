@@ -41,7 +41,7 @@ This doesn't have to be the first line, but it must come before any `#include ..
 Check for unresolved merge conflicts when committing.
 This is intended as an improved version of `check-merge-conflict` in https://github.com/pre-commit/pre-commit-hooks.
 The two additional features are handling LFS conflicts and underlines of `=` in `.rst` files.
-Unlink the original, this hook takes no arguments.
+Unlike the original, this hook takes no arguments.
 
 ### mypy
 
