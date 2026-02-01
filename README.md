@@ -13,7 +13,7 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 This repository provides the following pre-commit hooks:
 
 - [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
-- [todo-check](#todo-check) - ensure no "todo"s or "fixme"s are left in the source code.
+- [todo-check](#todo-check) - ensure no "todo"s, "fixme"s or "deleteme"s are left in the source code.
 - [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
 - [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
 - [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
@@ -40,8 +40,8 @@ This doesn't have to be the first line, but it must come before any `#include ..
 
 Check for unresolved merge conflicts when committing.
 This is intended as an improved version of `check-merge-conflict` in https://github.com/pre-commit/pre-commit-hooks.
-The two additional features are handling LFS conflicts and underlines of `=` in `.rst` files.
-Unlink the original, this hook takes no arguments.
+The additional features are handling LFS conflicts, conflicts from the stash, underlines of `=` in `.rst` files and 3-way merge conflict markers.
+This hook takes no arguments.
 
 ### mypy
 
