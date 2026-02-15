@@ -4,6 +4,7 @@ git+https://github.com/George-Ogden/mypy-pytest; python_version >= "3.12"
 GitPython
 pip
 pre-commit
+prek
 pytest
 pytest-timeout
 pytest-xdist
