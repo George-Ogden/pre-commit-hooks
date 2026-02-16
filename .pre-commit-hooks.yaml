@@ -49,4 +49,4 @@
   description: Format commit messages to version.txt as "Bump version X.X.X -> Y.Y.Y".
   entry: version-txt-auto-msg.sh
   language: script
-  stages: [prepare-commit-msg, commit-msg]
+  stages: [prepare-commit-msg]

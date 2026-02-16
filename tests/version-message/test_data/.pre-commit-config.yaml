@@ -1,4 +1,4 @@
-default_install_hook_types: [pre-commit, prepare-commit-msg, commit-msg]
+default_install_hook_types: [pre-commit, prepare-commit-msg]
 
 repos:
   - repo: .
