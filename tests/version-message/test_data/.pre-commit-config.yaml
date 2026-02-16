@@ -1,7 +1,8 @@
-default_install_hook_types: [pre-commit, prepare-commit-msg]
+default_install_hook_types: [pre-commit, prepare-commit-msg, commit-msg]
 
 repos:
   - repo: .
     rev: HEAD
     hooks:
       - id: version-txt-auto-msg
+        verbose: true
