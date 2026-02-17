@@ -10,5 +10,4 @@ on:
 
 jobs:
   lint:
-    # Do not update as v4 and greater uses `prek`, which is not compatible with nested `.pre-commit-config.yaml` files.
-    uses: George-Ogden/actions/.github/workflows/lint.yaml@v3.4.1
+    uses: George-Ogden/actions/.github/workflows/lint.yaml@v4.0.1

@@ -56,15 +56,21 @@ You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), other
 > _[If you] make spelling mistakes in commit messages, it's then a real pain to amend the commit. And god forbid if you pushed._
 
 This uses [`codespell`](https://github.com/codespell-project/codespell) under the hood, and accepts the same flags via the `args` field, but interactive mode is not supported.
-You need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: ["pre-commit", "commit-msg"]` to the `.pre-commit-config.yaml` (like below).
+You need to ensure that you install the `commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t commit-msg` or adding `default_install_hook_types: [pre-commit, commit-msg]` to the `.pre-commit-config.yaml` (like below).
+
+### version-txt-auto-msg
+
+This hook writes a specific message when you change `version.txt`: "Bump version X.X.X -> Y.Y.Y".
+It only works when you give it no message explicitly via `git commit -m ""` or `git commit --no-edit`.
+You need to ensure that you install the `prepare-commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t prepare-commit-msg` or adding `default_install_hook_types: [pre-commit, prepare-commit-msg]` to the `.pre-commit-config.yaml` (like below).
 
 ## Example Use
 
 Here's a sample `.pre-commit-config.yaml`:
 
 ```yaml
-default_stages: ["pre-commit"]
-default_install_hook_types: ["pre-commit", "commit-msg"]
+default_stages: [pre-commit]
+default_install_hook_types: [pre-commit, prepare-commit-msg, commit-msg]
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -89,7 +95,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.2.0
+    rev: v2.3.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -100,6 +106,7 @@ repos:
       - id: mypy
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
+      - id: version-txt-auto-msg
 ```
 
 ### Development

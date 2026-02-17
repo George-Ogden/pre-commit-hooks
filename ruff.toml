@@ -5,9 +5,10 @@ quote-style = "double"
 indent-style = "space"
 
 [lint]
-extend-select = ["B", "E", "ERA", "F", "I", "N", "PT", "PYI", "RET", "RUF", "SIM", "UP", "W"]
-extend-ignore = ["E501", "F811", "PT011", "PT012", "PT013", "PYI041", "RET504", "SIM118"]
+extend-select = ["B", "C4", "COM818", "E", "ERA", "F", "I", "ISC", "N", "PT", "PYI", "RET", "RUF", "SIM", "UP", "W"]
+extend-ignore = ["C408", "E501", "F811", "PT011", "PT012", "PT013", "PYI041", "RET504", "SIM118"]
 extend-unfixable = ["B905"]
+preview = true
 
 [lint.isort]
 force-sort-within-sections = true

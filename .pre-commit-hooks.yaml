@@ -43,3 +43,10 @@
   language: python
   stages: [commit-msg]
   additional_dependencies: [codespell]
+
+- id: version-txt-auto-msg
+  name: Write automated message to version.txt
+  description: Format commit messages to version.txt as "Bump version X.X.X -> Y.Y.Y".
+  entry: version-txt-auto-msg.sh
+  language: script
+  stages: [prepare-commit-msg]
