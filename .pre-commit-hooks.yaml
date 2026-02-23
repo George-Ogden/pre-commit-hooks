@@ -45,8 +45,15 @@
   additional_dependencies: [codespell]
 
 - id: version-txt-auto-msg
-  name: Write automated message to version.txt
+  name: Write automated message when version.txt is changed
   description: Format commit messages to version.txt as "Bump version X.X.X -> Y.Y.Y".
   entry: version-txt-auto-msg.sh
+  language: script
+  stages: [prepare-commit-msg]
+
+- id: mirror-auto-msg
+  name: Write automated message when .mirror.lock is changed
+  description: Add the message "Install mirror" or "Sync mirror" when mirror files are updated.
+  entry: mirror-auto-msg.sh
   language: script
   stages: [prepare-commit-msg]
