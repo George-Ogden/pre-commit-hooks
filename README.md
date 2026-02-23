@@ -95,7 +95,7 @@ repos:
         exclude: ^tests/[^/].*/test_data/
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.10
+    rev: v0.15.2
     hooks:
       - id: ruff-format
       - id: ruff
@@ -103,7 +103,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.3.0
+    rev: v2.4.0
     hooks:
       - id: dbg-check
         exclude: ^test/
