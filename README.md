@@ -64,6 +64,14 @@ This hook writes a specific message when you change `version.txt`: "Bump version
 It only works when you give it no message explicitly via `git commit -m ""` or `git commit --no-edit`.
 You need to ensure that you install the `prepare-commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t prepare-commit-msg` or adding `default_install_hook_types: [pre-commit, prepare-commit-msg]` to the `.pre-commit-config.yaml` (like below).
 
+### mirror-auto-msg
+
+Automatically add a message about modifying the `mirror.lock`.
+"Sync mirror" is added when you change `.mirror.lock` and "Install mirror" when you create it.
+_See [mirror-rorrim](https://github.com/George-Ogden/mirror-rorrim) for more information about mirror files._
+It only works when you give it no message explicitly via `git commit -m ""` or `git commit --no-edit`.
+You need to ensure that you install the `prepare-commit-msg` hooks, which you can do with `pre-commit install -t pre-commit -t prepare-commit-msg` or adding `default_install_hook_types: [pre-commit, prepare-commit-msg]` to the `.pre-commit-config.yaml` (like below).
+
 ## Example Use
 
 Here's a sample `.pre-commit-config.yaml`:
@@ -87,7 +95,7 @@ repos:
         exclude: ^tests/[^/].*/test_data/
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.14.10
+    rev: v0.15.2
     hooks:
       - id: ruff-format
       - id: ruff
@@ -95,7 +103,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.3.0
+    rev: v2.4.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -107,6 +115,7 @@ repos:
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
       - id: version-txt-auto-msg
+      - id: mirror-auto-msg
 ```
 
 ### Development
