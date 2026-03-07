@@ -8,7 +8,7 @@ ci:
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
-    rev: v0.4.5
+    rev: v0.4.7
     hooks:
       - id: mirror-check
         fail_fast: true
@@ -26,20 +26,20 @@ repos:
       - id: requirements-txt-fixer
 
   - repo: https://github.com/George-Ogden/linter/
-    rev: v2.0.0
+    rev: v2.1.1
     hooks:
       - id: lint
         exclude: ^tests/[^/]*/test_data/
         args: [--fix]
 
-  - repo: https://github.com/koalaman/shellcheck-precommit
+  - repo: https://github.com/koalaman/shellcheck-precommit/
     rev: v0.11.0
     hooks:
       - id: shellcheck
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.15.2
+    rev: v0.15.5
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -59,14 +59,14 @@ repos:
     hooks:
       - id: actionlint
 
-  - repo: https://github.com/codespell-project/codespell
-    rev: v2.4.1
+  - repo: https://github.com/codespell-project/codespell/
+    rev: v2.4.2
     hooks:
       - id: codespell
         exclude: tests/spell-check/
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.3.0
+    rev: v2.4.0
     hooks:
       - id: check-merge-conflict
         exclude: ^tests/merge-conflict/
@@ -88,4 +88,5 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         args: [-r, requirements-dev.txt, --show-traceback]
       - id: spell-check-commit-msgs
+      - id: mirror-auto-msg
       - id: version-txt-auto-msg
