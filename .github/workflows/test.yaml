@@ -1,4 +1,4 @@
-name: Test
+name: Run Python Tests
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - master
 
 jobs:
-  test:
-    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v4.0.1
+  run-pytest:
+    uses: George-Ogden/actions/.github/workflows/python-test.yaml@v4.1.0
     with:
       python-versions: "['3.9', '3.10', '3.11', '3.12', '3.13', '3.14']"
