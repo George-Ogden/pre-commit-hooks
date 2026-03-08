@@ -34,7 +34,7 @@
   entry: ./validate-todo.sh
   language: script
   types: [text]
-  exclude: ^\.
+  exclude: ^\.pre-commit-config\.ya?ml
 
 - id: spell-check-commit-msgs
   name: Spell check commit message
