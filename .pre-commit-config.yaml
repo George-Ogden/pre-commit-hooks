@@ -8,7 +8,7 @@ ci:
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
-    rev: v0.4.7
+    rev: v0.4.8
     hooks:
       - id: mirror-check
         fail_fast: true
@@ -66,7 +66,7 @@ repos:
         exclude: tests/spell-check/
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v2.4.0
+    rev: v3.0.0
     hooks:
       - id: check-merge-conflict
         exclude: ^tests/merge-conflict/
