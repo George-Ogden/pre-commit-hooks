@@ -12,7 +12,7 @@ FILES=()
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --disallowed-folder)
+    --disallowed-module)
       DIRECTORY="$2"
       shift
       shift
