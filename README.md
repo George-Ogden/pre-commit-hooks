@@ -10,16 +10,6 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 
 ## Hooks
 
-This repository provides the following pre-commit hooks:
-
-- [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
-- [todo-check](#todo-check) - ensure no "todo"s, "fixme"s or "deleteme"s are left in the source code.
-- [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
-- [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
-- [absolute-import-check](#absolute-import-check) - check all absolute imports have been replaced by relative ones.
-- [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
-- [spell-check-commit-msgs](#spell-check-commit-msgs) - check for spelling errors in commit messages.
-
 ### dbg-check
 
 Check `dbg` expressions/statements have been removed from Rust/Python/C++/CUDA/other files.
