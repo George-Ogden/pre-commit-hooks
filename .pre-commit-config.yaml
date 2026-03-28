@@ -1,5 +1,6 @@
 default_stages: [pre-commit]
-default_install_hook_types: [pre-commit, prepare-commit-msg, commit-msg]
+default_install_hook_types:
+  [pre-commit, prepare-commit-msg, commit-msg, post-commit, pre-push]
 
 ci:
   skip:
@@ -8,7 +9,7 @@ ci:
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
-    rev: v0.4.8
+    rev: v0.4.9
     hooks:
       - id: mirror-check
         fail_fast: true
@@ -39,7 +40,7 @@ repos:
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.15.6
+    rev: v0.15.8
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -66,7 +67,7 @@ repos:
         exclude: tests/spell-check/
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v3.0.1
+    rev: v3.0.2
     hooks:
       - id: check-merge-conflict
         exclude: ^tests/merge-conflict/
