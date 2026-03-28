@@ -5,7 +5,9 @@ GitPython
 pip
 pre-commit
 prek
-pytest
+py-spy
+pytest>=9.0.0
 pytest-timeout
 pytest-xdist
+ruff==0.15.8
 wcwidth

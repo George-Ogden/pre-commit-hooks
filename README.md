@@ -10,15 +10,6 @@ It may work with other Python versions or operating systems (such as MacOS or WS
 
 ## Hooks
 
-This repository provides the following pre-commit hooks:
-
-- [dbg-check](#dbg-check) - ensure no `dbg` statements, macros or imports are included in the source code.
-- [todo-check](#todo-check) - ensure no "todo"s, "fixme"s or "deleteme"s are left in the source code.
-- [pragma-once](#pragma-once) - ensure all headers start with `#pragma once`.
-- [check-merge-conflict](#check-merge-conflict) - check for merge conflicts.
-- [mypy](#mypy) - run [MyPy](#https://github.com/python/mypy).
-- [spell-check-commit-msgs](#spell-check-commit-msgs) - check for spelling errors in commit messages.
-
 ### dbg-check
 
 Check `dbg` expressions/statements have been removed from Rust/Python/C++/CUDA/other files.
@@ -50,6 +41,13 @@ This is intended as an improved version of https://github.com/pre-commit/mirrors
 It allows you to pass in a requirements file using the `-r` or `--requirements-file` flag (installed via [`uv`](https://docs.astral.sh/uv/)). Any additional flags are passed to the `mypy` executable (no defaults).
 It requires that you have `pip` installed, but if you're using pre-commit, that shouldn't be an issue.
 You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), otherwise, the latest is installed.
+
+### check-absolute-imports
+
+Check that there are no absolute imports from a specific module.
+This defaults to `src`, but you can set a custom module with the `--disallowed-module` flag.
+If you have scripts, you may want to exclude these, by default only `__main__.py` files are excluded.
+See the [pre-commit documentation](https://pre-commit.com/#top_level-exclude) to exclude other files as well.
 
 ### spell-check-commit-msgs
 
@@ -103,7 +101,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v3.0.2
+    rev: v3.1.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -111,6 +109,7 @@ repos:
         exclude: README
       - id: pragma-once
       - id: check-merge-conflict
+      - id: check-absolute-imports
       - id: mypy
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs

@@ -1,0 +1,6 @@
+repos:
+  - repo: .
+    rev: HEAD
+    hooks:
+      - id: absolute-imports-check
+        args: [--disallowed-module, custom_folder]
