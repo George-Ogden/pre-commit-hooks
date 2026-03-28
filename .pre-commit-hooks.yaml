@@ -57,3 +57,10 @@
   entry: mirror-auto-msg.sh
   language: script
   stages: [prepare-commit-msg]
+
+- id: absolute-imports-check
+  name: Check for absolute imports
+  language: script
+  entry: validate-absolute-imports.sh
+  types: [python]
+  exclude: __main__\.py$
