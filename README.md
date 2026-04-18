@@ -42,7 +42,7 @@ It allows you to pass in a requirements file using the `-r` or `--requirements-f
 It requires that you have `pip` installed, but if you're using pre-commit, that shouldn't be an issue.
 You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), otherwise, the latest is installed.
 
-### check-absolute-imports
+### absolute-imports-check
 
 Check that there are no absolute imports from a specific module.
 This defaults to `src`, but you can set a custom module with the `--disallowed-module` flag.
@@ -109,7 +109,7 @@ repos:
         exclude: README
       - id: pragma-once
       - id: check-merge-conflict
-      - id: check-absolute-imports
+      - id: absolute-imports-check
       - id: mypy
         args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
