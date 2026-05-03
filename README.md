@@ -27,13 +27,6 @@ Hidden files are ignored.
 Ensure all C++/CUDA headers contain `#pragma once`.
 This doesn't have to be the first line, but it must come before any `#include ...` statements.
 
-### check-merge-conflict
-
-Check for unresolved merge conflicts when committing.
-This is intended as an improved version of `check-merge-conflict` in https://github.com/pre-commit/pre-commit-hooks.
-The additional features are handling LFS conflicts, conflicts from the stash, underlines of `=` in `.rst` files and 3-way merge conflict markers.
-This hook takes no arguments.
-
 ### mypy
 
 Run [MyPy](#https://github.com/python/mypy) in an environment with dependencies.
@@ -108,7 +101,6 @@ repos:
       - id: todo-check
         exclude: README
       - id: pragma-once
-      - id: check-merge-conflict
       - id: absolute-imports-check
       - id: mypy
         args: [-r, requirements.txt, --strict]
