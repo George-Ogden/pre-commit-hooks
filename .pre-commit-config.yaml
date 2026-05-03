@@ -14,8 +14,7 @@ repos:
       - id: mirror-check
         fail_fast: true
 
-  - repo: https://github.com/pre-commit/pre-commit-hooks/
-    rev: v6.0.0
+  - repo: builtin
     hooks:
       - id: no-commit-to-branch
         fail_fast: true
@@ -26,7 +25,12 @@ repos:
       - id: trailing-whitespace
         stages: [pre-commit]
       - id: check-merge-conflict
-        exclude: ^tests/merge-conflict/test_data/
+        stages: [pre-commit]
+        args: [--assume-in-merge]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
       - id: requirements-txt-fixer
 
   - repo: https://github.com/George-Ogden/linter/
@@ -43,7 +47,7 @@ repos:
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.15.11
+    rev: v0.15.12
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -70,10 +74,8 @@ repos:
         exclude: tests/spell-check/
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v3.1.0
+    rev: v3.1.1
     hooks:
-      - id: check-merge-conflict
-        exclude: ^tests/merge-conflict/
       - id: dbg-check
         exclude: (?x)^(
           tests/dbg-check/.*|
