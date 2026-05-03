@@ -13,13 +13,6 @@
   types_or: [c++, file]
   files: \.(hpp|h\+\+|hxx|cuh)$
 
-- id: check-merge-conflict
-  name: Check for merge conflicts
-  description: Check for merge-conflicts.
-  entry: ./validate-merge-conflict.sh
-  language: script
-  types: [file]
-
 - id: mypy
   name: Run MyPy
   description: MyPy
