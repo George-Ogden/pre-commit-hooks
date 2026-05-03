@@ -1,4 +1,5 @@
 from collections import defaultdict
+from collections.abc import Generator
 from glob import glob
 import os.path
 import textwrap
@@ -37,7 +38,7 @@ for test_file in get_test_files():
 
 
 @pytest.fixture(autouse=True)
-def git_setup():
+def git_setup() -> Generator[None]:
     repository = git.Repo()
     diff = repository.index.diff(None, paths=TEST_ROOT)
     if diff:
