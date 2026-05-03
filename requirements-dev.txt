@@ -9,5 +9,5 @@ py-spy
 pytest>=9.0.0
 pytest-timeout
 pytest-xdist
-ruff==0.15.11
+ruff==0.15.12
 wcwidth
