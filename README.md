@@ -22,6 +22,13 @@ It checks comments and code, such as `todo!()` or `# TODO: ...`.
 Any words that contain either of these phrases are ignored (such as "pho**todo**cumentary").
 Hidden files are ignored.
 
+### list-untracked-files
+
+List all untracked files and directories.
+If there are any untracked files, they will be listed alongside a warning.
+If there are none, nothing happens.
+This hook always passes, unless there is an internal error.
+
 ### pragma-once
 
 Ensure all C++/CUDA headers contain `#pragma once`.
