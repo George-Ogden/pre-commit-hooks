@@ -63,6 +63,6 @@
   description: List untracked files if any, and exit with code 0 (unless an internal error occurs).
   always_run: true
   pass_filenames: false
-  language: system
-  entry: ./list-untracked-files.sh
+  language: script
+  entry: list-untracked-files.sh
   verbose: true
