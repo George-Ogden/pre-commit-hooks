@@ -64,5 +64,5 @@
   always_run: true
   pass_filenames: false
   language: system
-  entry: ./list-untracked-files.sh
+  entry: list-untracked-files.sh
   verbose: true
