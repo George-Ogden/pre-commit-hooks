@@ -1,4 +1,9 @@
 # Specific Files
+logs/
+plot*.pdf
+.harper-dictionary.txt
+scratch*
+.merge_file*
 tmp.py
 log.txt
 stdout.txt
