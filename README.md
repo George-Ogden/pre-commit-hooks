@@ -101,7 +101,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v4.0.0
+    rev: v4.1.0
     hooks:
       - id: dbg-check
         exclude: ^test/
@@ -114,6 +114,7 @@ repos:
       - id: spell-check-commit-msgs
       - id: version-txt-auto-msg
       - id: mirror-auto-msg
+      - id: list-untracked-imports
 ```
 
 ### Development
