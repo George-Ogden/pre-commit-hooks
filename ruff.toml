@@ -5,9 +5,47 @@ quote-style = "double"
 indent-style = "space"
 
 [lint]
-extend-select = ["ANN", "B", "C4", "COM818", "ERA", "F", "I", "ISC", "N", "PT", "PYI", "RET", "RUF", "SIM", "UP", "W"]
-extend-ignore = ["ANN401", "C408", "E501", "F811", "N812", "PLC0414", "PT011", "PT012", "PT013", "PYI041", "RET504", "S", "SIM118", "TRY"]
-extend-unfixable = ["B905", "B911", "B912", "PT006"]
+extend-select = [
+  "ANN",    # flake8-annotations
+  "B",      # flake8-bugbear
+  "C4",     # flake8-comprehensions
+  "COM818", # trailing-comma-on-bare-tuple
+  "ERA",    # eradicate
+  "F",      # Pyflakes
+  "I",      # isort
+  "ISC",    # flake8-implicit-str-concat
+  "N",      # pep8-naming
+  "PT",     # flake8-pytest-style
+  "PYI",    # flake8-pyi
+  "RET",    # flake8-return
+  "RUF",    # Ruff-specific rules
+  "SIM",    # flake8-simplify
+  "UP",     # pyupgrade
+  "W",      # Warning (whitespace)
+]
+
+extend-ignore = [
+  "ANN401", # flake8-annotations: any-type
+  "C408",   # flake8-comprehensions: unnecessary-collection-call
+  "E501",   # pycodestyle: line-too-long
+  "F811",   # Pyflakes: redefined-while-unused
+  "N812",   # pep8-naming: lowercase-imported-as-non-lowercase
+  "PLC0414",# Pylint: useless-import-alias
+  "PT011",  # flake8-pytest-style: pytest-raises-too-broad
+  "PT012",  # flake8-pytest-style: pytest-raises-with-multiple-statements
+  "PT013",  # flake8-pytest-style: pytest-incorrect-pytest-import
+  "PYI041", # flake8-pyi: redundant-numeric-union
+  "RET504", # flake8-return: unnecessary-assign
+  "S",      # flake8-bandit
+  "SIM118", # flake8-simplify: in-dict-keys
+  "TRY",    # tryceratops
+]
+
+extend-unfixable = [
+  "B905",   # flake8-bugbear: zip-without-explicit-strict
+  "B911",   # flake8-bugbear: batched-without-explicit-strict
+  "B912",   # flake8-bugbear: pairwise-without-explicit-strict
+]
 preview = true
 
 [lint.isort]
