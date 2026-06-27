@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 DIRECTORY=$(dirname $0)
-LOG=`mktemp`
+LOG=$(mktemp)
 
 cd $DIRECTORY/test_data/plugin
 git init

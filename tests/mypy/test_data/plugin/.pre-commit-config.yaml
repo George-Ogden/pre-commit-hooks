@@ -3,3 +3,4 @@ repos:
     rev: HEAD
     hooks:
       - id: mypy
+        args: [--show-traceback]

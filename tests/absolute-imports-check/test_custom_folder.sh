@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 DIRECTORY=$(dirname $0)
-LOG=`mktemp`
+LOG=$(mktemp)
 
 pre-commit run -v --config $DIRECTORY/test_data/custom_folder/.pre-commit-config.yaml --files $DIRECTORY/test_data/custom_folder/custom_folder.py | tee $LOG || true
 

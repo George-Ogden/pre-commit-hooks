@@ -9,7 +9,7 @@ ci:
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
-    rev: v0.4.9
+    rev: v0.4.10
     hooks:
       - id: mirror-check
         fail_fast: true
@@ -42,6 +42,12 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         args: [--fix]
 
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+        stages: [pre-commit]
+
   - repo: https://github.com/koalaman/shellcheck-precommit/
     rev: v0.11.0
     hooks:
@@ -49,7 +55,7 @@ repos:
         args: [--severity=warning]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.15.15
+    rev: v0.15.20
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -76,7 +82,7 @@ repos:
         exclude: tests/spell-check/
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v4.0.0
+    rev: v4.1.1
     hooks:
       - id: dbg-check
         exclude: (?x)^(
@@ -98,3 +104,4 @@ repos:
       - id: spell-check-commit-msgs
       - id: mirror-auto-msg
       - id: version-txt-auto-msg
+      - id: list-untracked-files

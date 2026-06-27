@@ -2,7 +2,7 @@
 
 set -e
 DIRECTORY=$(dirname $0)
-CWD=`pwd`
+CWD=$(pwd)
 
 cd "$(mktemp -d)"
 git init
@@ -15,12 +15,12 @@ git add .
 git commit -am "Initial commit"
 pre-commit install
 
-echo "- commit: new" > .mirror.lock
+echo "- commit: new" >.mirror.lock
 git commit .mirror.lock -m "Here is a message"
 
 [ "$(git log -n 1 --format="%s")" == "Here is a message" ]
 
-echo "- commit: newer" > .mirror.lock
+echo "- commit: newer" >.mirror.lock
 git commit .mirror.lock --amend --no-edit
 
 [ "$(git log -n 1 --format="%s")" == "Here is a message" ]
