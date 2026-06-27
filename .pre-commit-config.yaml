@@ -42,6 +42,12 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         args: [--fix]
 
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+        stages: [pre-commit]
+
   - repo: https://github.com/koalaman/shellcheck-precommit/
     rev: v0.11.0
     hooks:
