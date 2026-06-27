@@ -2,7 +2,7 @@
 
 set -e
 DIRECTORY=$(dirname $0)
-CWD=`pwd`
+CWD=$(pwd)
 
 cd "$(mktemp -d)"
 git init
@@ -15,7 +15,7 @@ git add .
 git commit -am "Initial commit"
 pre-commit install
 
-echo "1.4.0" > version.txt
+echo "1.4.0" >version.txt
 git commit version.txt -m "# not ignored"
 
 [ "$(git log -n 1 --format="%s")" == "# not ignored" ]

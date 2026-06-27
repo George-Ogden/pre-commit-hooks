@@ -2,7 +2,7 @@
 
 set -e
 DIRECTORY=$(dirname $0)
-CWD=`pwd`
+CWD=$(pwd)
 
 cd "$(mktemp -d)"
 git init

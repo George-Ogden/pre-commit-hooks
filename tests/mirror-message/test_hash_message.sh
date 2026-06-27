@@ -2,7 +2,7 @@
 
 set -e
 DIRECTORY=$(dirname $0)
-CWD=`pwd`
+CWD=$(pwd)
 
 cd "$(mktemp -d)"
 git init
@@ -15,7 +15,7 @@ git add .
 git commit -am "Initial commit"
 pre-commit install
 
-echo "- commit: new" > .mirror.lock
+echo "- commit: new" >.mirror.lock
 git commit .mirror.lock -m "# not ignored"
 
 [ "$(git log -n 1 --format="%s")" == "# not ignored" ]

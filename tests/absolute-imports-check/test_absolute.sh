@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 DIRECTORY=$(dirname $0)
-LOG=`mktemp`
+LOG=$(mktemp)
 
 pre-commit try-repo . absolute-imports-check -v --files $DIRECTORY/test_data/absolute_only.py | tee $LOG && exit 1
 
