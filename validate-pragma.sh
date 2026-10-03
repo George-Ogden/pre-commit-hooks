@@ -7,8 +7,8 @@ INCLUDE_PATTERN='^[[:space:]]*#include'
 
 EXITCODE=0
 for file in "$@"; do
-	sed "/$INCLUDE_PATTERN/q" "$file" | grep -qE "$PRAGMA_PATTERN" || {
-		if grep -qE "$PRAGMA_PATTERN" "$file"; then
+	sed "/$INCLUDE_PATTERN/q" "$file" | rg -q "$PRAGMA_PATTERN" || {
+		if rg -q "$PRAGMA_PATTERN" "$file"; then
 			printf "\`#pragma once\` found in %s but after the first \`#include\`\n" "$file"
 		else
 			printf "No \`#pragma once\` found in %s\n" "$file"
