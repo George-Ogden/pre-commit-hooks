@@ -1,10 +1,12 @@
 # DANGER: EDIT AT YOUR OWN RISK. Track this file in version control so that others can sync files correctly.
-- commit: 0884a00aa6126c37447f2e39dc4a72d3a34498be
+- commit: 415e7d8b6616b12a26f0f91c0504b61b4426fea6
   files:
   - .github/python-release.yaml
   - .github/python-test.yaml
   - .github/readme-check.yaml
   - .github/workflows/lint.yaml
+  - .semgrep-rules/pre-commit.yaml
+  - .semgrep-rules/python.yaml
   - LICENSE
   - mypy.ini
   - pyproject.toml
