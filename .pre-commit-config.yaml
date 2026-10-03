@@ -18,6 +18,7 @@ repos:
     hooks:
       - id: no-commit-to-branch
         fail_fast: true
+        args: [-b, m]
       - id: end-of-file-fixer
         stages: [pre-commit]
       - id: mixed-line-ending
@@ -29,6 +30,22 @@ repos:
       - id: check-merge-conflict
         stages: [pre-commit]
         args: [--assume-in-merge]
+
+  - repo: https://github.com/semgrep/pre-commit/
+    rev: v1.179.0
+    hooks:
+      - id: semgrep
+        require_serial: true
+        args:
+          [
+            --config,
+            .semgrep-rules/python.yaml,
+            --autofix,
+            --quiet,
+            --error,
+            --skip-unknown-extensions,
+            --disable-version-check,
+          ]
 
   - repo: https://github.com/pre-commit/pre-commit-hooks/
     rev: v6.0.0
@@ -42,8 +59,14 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         args: [--fix]
 
-  - repo: https://github.com/scop/pre-commit-shfmt
+  - repo: https://github.com/scop/pre-commit-shfmt/
     rev: v3.13.1-1
+    hooks:
+      - id: shfmt
+        stages: [pre-commit]
+
+  - repo: https://github.com/scop/pre-commit-shfmt/
+    rev: v3.14.1-1
     hooks:
       - id: shfmt
         stages: [pre-commit]
@@ -54,8 +77,24 @@ repos:
       - id: shellcheck
         args: [--severity=warning]
 
+  - repo: https://github.com/semgrep/pre-commit/
+    rev: v1.178.0
+    hooks:
+      - id: semgrep
+        require_serial: true
+        args:
+          [
+            --config,
+            .semgrep-rules/pre-commit.yaml,
+            --autofix,
+            --quiet,
+            --error,
+            --skip-unknown-extensions,
+            --disable-version-check,
+          ]
+
   - repo: https://github.com/astral-sh/ruff-pre-commit/
-    rev: v0.15.20
+    rev: v0.16.10
     hooks:
       - id: ruff-check
         args: [--fix]
@@ -64,8 +103,8 @@ repos:
         exclude: ^tests/[^/]*/test_data/
         args: [--config, format.skip-magic-trailing-comma = true]
 
-  - repo: https://github.com/pre-commit/mirrors-prettier/
-    rev: v4.0.0-alpha.8
+  - repo: https://github.com/rbubley/mirrors-prettier/
+    rev: v3.9.9
     hooks:
       - id: prettier
         exclude: ^tests/[^/]*/test_data/
@@ -76,10 +115,16 @@ repos:
       - id: actionlint
 
   - repo: https://github.com/codespell-project/codespell/
-    rev: v2.4.2
+    rev: v2.4.3
     hooks:
       - id: codespell
         exclude: tests/spell-check/
+        args:
+          - -f
+          - --regex
+          # Copied from https://github.com/codespell-project/codespell/issues/2730#issuecomment-1657006554.
+          - |
+            (?<![a-zà-öø-ÿ])[a-zà-öø-ÿ'`]+|[A-ZÀ-ÖØ-Þ][a-zà-öø-ÿ'`]*|[a-zà-öø-ÿ]+'[a-zà-öø-ÿ]*|[a-zà-öø-ÿ]+(?=[_-])|[a-zà-öø-ÿ]+(?=[A-ZÀ-ÖØ-Þ])|\d+
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
     rev: v4.1.1
@@ -92,11 +137,11 @@ repos:
       - id: todo-check
         exclude: (?x)^(
           README.md|
-          .pre-commit-config.yaml|
-          .pre-commit-hooks.yaml|
-          .gitignore|
+          \.pre-commit-hooks\.yaml|
           tests/[^/]*/.*|
-          validate-todo.sh
+          validate-todo.sh|
+          \.pre-commit-config\.yaml|
+          \.gitignore
           )$
       - id: mypy
         exclude: ^tests/[^/]*/test_data/

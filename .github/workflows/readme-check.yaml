@@ -3,13 +3,13 @@ name: Check README for Version
 on:
   push:
     branches:
-      - master
+      - m
   pull_request:
     branches:
-      - master
+      - m
 
 jobs:
   check-readme:
-    uses: George-Ogden/actions/.github/workflows/readme-check.yaml@v4.6.3
+    uses: George-Ogden/actions/.github/workflows/readme-check.yaml@v4.6.4
     with:
       prefix: "rev: v"
