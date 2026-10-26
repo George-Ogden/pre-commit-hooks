@@ -4,7 +4,7 @@ If you are unfamiliar with pre-commit hooks, see their website: https://pre-comm
 
 ## Compatibility
 
-These hooks are tested with Python 3.10-3.15.
+These hooks are tested with Python 3.11-3.15.
 The hooks use bash scripts, so is tested and run on Ubuntu.
 It may work with other Python versions or operating systems (such as MacOS or WSL).
 
@@ -93,7 +93,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v5.0.0
+    rev: v5.0.1
     hooks:
       - id: dbg-check
         exclude: ^test/
