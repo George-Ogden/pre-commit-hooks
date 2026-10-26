@@ -93,7 +93,7 @@ repos:
           - --fix
 
   - repo: https://github.com/George-Ogden/pre-commit-hooks/
-    rev: v4.1.2
+    rev: v5.0.0
     hooks:
       - id: dbg-check
         exclude: ^test/
