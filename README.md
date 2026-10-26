@@ -34,6 +34,13 @@ This hook always passes, unless there is an internal error.
 Ensure all C++/CUDA headers contain `#pragma once`.
 This doesn't have to be the first line, but it must come before any `#include ...` statements.
 
+### ty-check
+
+Run [ty](https://docs.astral.sh/ty/) in an environment with dependencies.
+It allows you to pass in a dependency group using the `-g` or `--group` flag (installed via [`uv`](https://docs.astral.sh/uv/)). Any additional flags are passed to the `ty` executable (no defaults). If no dependency group is specified, it defaults to the `types` group.
+This hook does not accept filenames as an argument - it runs on all the files on every commit. This means to exclude files, you must use the `--exclude` flag instead of the builtin `exclude` key.
+It requires that you have `pip` or `uv` installed, but if you're using `pre-commit` or `prek`, that shouldn't be an issue.
+
 ### absolute-imports-check
 
 Check that there are no absolute imports from a specific module.
@@ -101,6 +108,8 @@ repos:
         exclude: README
       - id: pragma-once
       - id: absolute-imports-check
+      - id: ty
+        args: [--exclude, test_samples/]
       - id: spell-check-commit-msgs
       - id: version-txt-auto-msg
       - id: mirror-auto-msg
