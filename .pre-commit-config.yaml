@@ -6,6 +6,7 @@ ci:
   skip:
     - mirror-check
     - no-commit-to-branch
+    - semgrep
 
 repos:
   - repo: https://github.com/George-Ogden/mirror-rorrim/
