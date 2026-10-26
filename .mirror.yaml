@@ -7,6 +7,7 @@ repos:
       - .github/workflows/release.yaml: .github/python-release.yaml
       - .github/workflows/readme-check.yaml: .github/readme-check.yaml
       - .github/workflows/test.yaml: .github/python-test.yaml
+      - .github/workflows/mypy.yaml: .github/mypy.yaml
 
       - README.md: template-README.md
       - LICENSE
@@ -14,12 +15,11 @@ repos:
 
       - .gitignore: python.gitignore
       - .pre-commit-config.yaml: python.pre-commit-config.yaml
+      - tombi.toml
       - .semgrep-rules/python.yaml
       - .semgrep-rules/pre-commit.yaml
 
-      - mypy.ini
       - pyproject.toml
+      - mypy.ini
       - pytest.ini
-      - requirements-dev.txt
-      - requirements.txt
       - ruff.toml

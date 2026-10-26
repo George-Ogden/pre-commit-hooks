@@ -44,3 +44,39 @@ rules:
       - pattern-regex: '\bmore_itertools\b'
     fix: |
       mit
+
+  - id: empty-abstract-method
+    languages:
+      - python
+    severity: ERROR
+    message: Fill in the body or `raise NotImplementedError()` to prevent issues in derived classes.
+    patterns:
+      - pattern: |
+          @abc.abstractmethod
+          def $F(...) -> ...:
+            $BODY
+      - metavariable-regex:
+          metavariable: $BODY
+          regex: ^\.\.\.$
+    fix-regex:
+      regex: \.\.\.
+      replacement: raise NotImplementedError()
+
+  - id: empty-protocol-method
+    languages:
+      - python
+    severity: ERROR
+    message: Fill in the body or `raise NotImplementedError()` to prevent issues in implementations.
+    patterns:
+      - pattern: |-
+          def $F(...) -> ...:
+            $BODY
+      - pattern-inside: |
+          class $X(Protocol, ...):
+            ...
+      - metavariable-regex:
+          metavariable: $BODY
+          regex: ^\.\.\.$
+    fix-regex:
+      regex: \.\.\.
+      replacement: raise NotImplementedError()
