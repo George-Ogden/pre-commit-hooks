@@ -3,4 +3,4 @@
 set -e
 DIRECTORY=$(dirname $0)
 
-pre-commit try-repo . --config $DIRECTORY/test_data/valid/.pre-comimt-config.yaml ty-check -v --files $DIRECTORY/test_data/valid.py
+pre-commit try-repo . ty-check -v --config $DIRECTORY/test_data/valid/.pre-comimt-config.yaml --files $DIRECTORY/test_data/valid.py
