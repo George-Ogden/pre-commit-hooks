@@ -1,6 +1,0 @@
-repos:
-  - repo: .
-    rev: HEAD
-    hooks:
-      - id: mypy
-        args: [--ignore-missing-imports]
