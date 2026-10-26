@@ -1,6 +1,6 @@
 [project]
 name = "Pre-Commit-Hooks"
-requires-python = ">=3.10,<3.15"
+requires-python = ">=3.10,<3.16"
 authors = [{ name = "George Ogden" }]
 license-files = ["LICENSE"]
 readme = "README.md"
