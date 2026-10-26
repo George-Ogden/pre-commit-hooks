@@ -34,14 +34,6 @@ This hook always passes, unless there is an internal error.
 Ensure all C++/CUDA headers contain `#pragma once`.
 This doesn't have to be the first line, but it must come before any `#include ...` statements.
 
-### mypy
-
-Run [MyPy](#https://github.com/python/mypy) in an environment with dependencies.
-This is intended as an improved version of https://github.com/pre-commit/mirrors-mypy.
-It allows you to pass in a requirements file using the `-r` or `--requirements-file` flag (installed via [`uv`](https://docs.astral.sh/uv/)). Any additional flags are passed to the `mypy` executable (no defaults).
-It requires that you have `pip` installed, but if you're using pre-commit, that shouldn't be an issue.
-You can set the MyPy version in the requirements file (eg `mypy==1.17.1`), otherwise, the latest is installed.
-
 ### absolute-imports-check
 
 Check that there are no absolute imports from a specific module.
@@ -109,8 +101,6 @@ repos:
         exclude: README
       - id: pragma-once
       - id: absolute-imports-check
-      - id: mypy
-        args: [-r, requirements.txt, --strict]
       - id: spell-check-commit-msgs
       - id: version-txt-auto-msg
       - id: mirror-auto-msg
