@@ -1,0 +1,16 @@
+repos:
+  - repo: .
+    rev: HEAD
+    hooks:
+      - id: ty-check
+        alias: ty-good
+        args:
+          - --group
+          - doesnotexist
+          - tests/ty/test_data/invalid-dependency-group/good.py
+      - id: ty-check
+        alias: ty-bad
+        args:
+          - --group
+          - doesnotexist
+          - tests/ty/test_data/invalid-dependency-group/bad.py

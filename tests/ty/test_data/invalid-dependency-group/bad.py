@@ -1,0 +1,1 @@
+print("Invalid " + 0)

@@ -13,6 +13,15 @@
   types_or: [c++, file]
   files: \.(hpp|h\+\+|hxx|cuh)$
 
+- id: ty-check
+  name: Run ty
+  description: ty
+  entry: ./run-ty.sh
+  language: script
+  types: [python]
+  require_serial: true
+  pass_filenames: false
+
 - id: todo-check
   name: Check for `todo`s
   description: Check for 'todo' or 'fixme' left in source files.

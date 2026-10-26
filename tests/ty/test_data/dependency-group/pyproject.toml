@@ -1,0 +1,8 @@
+[project]
+name = "dependency-group-test"
+version = "0.0.0"
+dependencies = ["pygments"]
+
+[dependency-groups]
+dev = ["pytest"]
+pygments = ["types-pygments"]
