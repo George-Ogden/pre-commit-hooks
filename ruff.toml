@@ -7,28 +7,28 @@ indent-style = "space"
 
 [lint]
 extend-select = [
-  "ANN", # flake8-annotations
-  "B",   # flake8-bugbear
+  "ANN",  # flake8-annotations
+  "B",  # flake8-bugbear
   "C4",  # flake8-comprehensions
-  "ERA", # eradicate
-  "F",   # Pyflakes
-  "I",   # isort
-  "ISC", # flake8-implicit-str-concat
-  "N",   # pep8-naming
-  "PGH", # pygrep-hooks
+  "ERA",  # eradicate
+  "F",  # Pyflakes
+  "I",  # isort
+  "ISC",  # flake8-implicit-str-concat
+  "N",  # pep8-naming
+  "PGH",  # pygrep-hooks
   "PT",  # flake8-pytest-style
-  "PYI", # flake8-pyi
-  "RET", # flake8-return
-  "RUF", # Ruff-specific rules
-  "SIM", # flake8-simplify
+  "PYI",  # flake8-pyi
+  "RET",  # flake8-return
+  "RUF",  # Ruff-specific rules
+  "SIM",  # flake8-simplify
   "UP",  # pyupgrade
-  "W",   # Warning (whitespace)
+  "W",  # Warning (whitespace)
   "trailing-comma-on-bare-tuple",
 ]
 
-extend-ignore = [
-  "S",   # "flake8-bandit"
-  "TRY", # tryceratops
+ignore = [
+  "S",  # "flake8-bandit"
+  "TRY",  # tryceratops
   "any-type",
   "in-dict-keys",
   "line-too-long",
@@ -44,7 +44,7 @@ extend-ignore = [
   "useless-import-alias",
 ]
 
-extend-unfixable = [
+unfixable = [
   "batched-without-explicit-strict",
   "map-without-explicit-strict",
   "zip-without-explicit-strict",

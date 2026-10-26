@@ -1,6 +1,7 @@
 # DANGER: EDIT AT YOUR OWN RISK. Track this file in version control so that others can sync files correctly.
-- commit: 415e7d8b6616b12a26f0f91c0504b61b4426fea6
+- commit: 4f0e35778d05139b12c82f80fcffcdf19590d42f
   files:
+  - .github/mypy.yaml
   - .github/python-release.yaml
   - .github/python-test.yaml
   - .github/readme-check.yaml
@@ -14,9 +15,8 @@
   - python.gitignore
   - python.mirror.yaml
   - python.pre-commit-config.yaml
-  - requirements-dev.txt
-  - requirements.txt
   - ruff.toml
   - template-README.md
+  - tombi.toml
   - version.txt
   source: https://github.com/George-Ogden/mirror-config

@@ -8,7 +8,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: read
 
 jobs:
   tag-and-release:
-    uses: George-Ogden/actions/.github/workflows/python-release.yaml@v4.6.4
+    uses: George-Ogden/actions/.github/workflows/python-release.yaml@v5.2.1
