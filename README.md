@@ -4,7 +4,7 @@ If you are unfamiliar with pre-commit hooks, see their website: https://pre-comm
 
 ## Compatibility
 
-This hook is tested with Python 3.10-3.14.
+These hooks are tested with Python 3.10-3.15.
 The hooks use bash scripts, so is tested and run on Ubuntu.
 It may work with other Python versions or operating systems (such as MacOS or WSL).
 
