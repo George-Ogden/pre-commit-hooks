@@ -1,0 +1,8 @@
+[project]
+name = "invalid-dependency-group-test"
+version = "0.0.0"
+dependencies = []
+
+[dependency-groups]
+dev = []
+types = ["ty==0.0.60"]

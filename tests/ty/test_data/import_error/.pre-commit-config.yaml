@@ -1,0 +1,9 @@
+repos:
+  - repo: .
+    rev: HEAD
+    hooks:
+      - id: ty-check
+        args: [
+            --ignore, unresolved-import,
+            tests/ty/test_data/import_error,
+          ]

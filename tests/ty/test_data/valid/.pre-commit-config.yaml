@@ -1,0 +1,7 @@
+repos:
+  - repo: ../../../../
+    rev: HEAD
+    hooks:
+      - id: ty-check
+        args: [-vvv]
+        args: [ty/test_data/type_error/, valid]

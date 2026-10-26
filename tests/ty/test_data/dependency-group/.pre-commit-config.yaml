@@ -1,0 +1,6 @@
+repos:
+  - repo: ../../../../
+    rev: HEAD
+    hooks:
+      - id: ty-check
+        args: [--group, pygments]
