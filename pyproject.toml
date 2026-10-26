@@ -20,10 +20,14 @@ dev = [
   { include-group = "types" },
 ]
 test = [
+  "gitpython",
   "inline-snapshot",
+  "pre-commit",
   "pytest>=9.0.0",
   "pytest-dbg ; python_full_version >= '3.11'",
   "pytest-timeout",
+  "pytest-xdist",
+  "wcwidth",
   { include-group = "utils" },
 ]
 lint = [
